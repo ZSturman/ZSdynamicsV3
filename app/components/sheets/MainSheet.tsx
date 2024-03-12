@@ -13,18 +13,25 @@ const MainSheet = ({}) => {
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "end start"],
+    offset: ["start 30px", "start start"],
   });
 
-  const thresholdStart = 0.86;
-  const thresholdEnd = 0.98;
-  const startY = -20;
-  const endY = 100;
-
-  const yPos = useTransform(
+  const y = useTransform(
     scrollYProgress,
-    [0, thresholdStart, thresholdEnd, 1],
-    [startY, startY, endY, endY]
+    [0, 1],
+    [0, 10]
+  );
+
+  const scaleY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [1, 0]
+  );
+
+  const scaleX = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [1, 2]
   );
 
   return (
@@ -33,11 +40,11 @@ const MainSheet = ({}) => {
       <div className="min-h-screen w-screen sm:w-[700px] md:w-[800px] lg:w-[900px] rounded-xl bg-light-shade dark:bg-dark-shade shadow-xl   flex flex-col h-full">
         <div
           ref={ref}
-          className="sticky top-0 h-20 w-full bg-dark-accent rounded-t-xl z-10 items-center text-center flex justify-end flex-col overflow-hidden shadow-md "
+          className="sticky top-0 h-10 w-full bg-dark-accent rounded-t-xl z-10 items-center text-center flex justify-end flex-col overflow-hidden shadow-md "
         >
           <motion.h1
-            className="text-3xl tracking-widest pt-12"
-            style={{ y: yPos }}
+            className="text-3xl tracking-widest"
+            style={{ y, scaleY, scaleX}}
           >
             {selectedContent}
           </motion.h1>

@@ -1,7 +1,6 @@
 "use client"
 import React, { useState } from 'react'
-import ContactForm from './contactForm/ContactForm'
-import ContactFormTwo from './contactForm/ContactFormTwo'
+import ContactForm from "./contactForm/ContactForm"
 
 const ContactSheet = () => {
   const [flashMessage, setFlashMessage] = useState({
@@ -24,7 +23,7 @@ const ContactSheet = () => {
         {flashMessage.message}
       </div>
     )}
-      <ContactFormTwo setFlashMessage={setFlashMessage} />
+      <ContactForm setFlashMessage={setFlashMessage} />
     </div>
   )
 }

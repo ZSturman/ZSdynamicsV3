@@ -1,11 +1,30 @@
 "use client";
-import { useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import NavSlice from "./NavSlice";
-import { motion } from "framer-motion";
+import {
+  AnimationPlaybackControls,
+  animate,
+  motion,
+  useMotionValue,
+} from "framer-motion";
 import { FaHamburger } from "react-icons/fa";
 
 const NavContainer = () => {
   const [navVisible, setNavVisible] = useState(false);
+  const controlsRef = useRef<AnimationPlaybackControls | null>(null);
+  const rotate = useMotionValue(0);
+
+  useEffect(() => {
+    controlsRef.current = animate(rotate, 360, {
+      repeat: Infinity,
+      duration: 5,
+      ease: "linear",
+    });
+
+    return () => {
+      controlsRef.current?.stop();
+    };
+  }, []);
 
   const handleNavToggle = () => {
     setNavVisible(!navVisible);
@@ -16,6 +35,8 @@ const NavContainer = () => {
       <div className="fixed bottom-0 flex w-full items-center justify-center pb-10">
         <NavSlice navVisible={navVisible} setNavVisible={setNavVisible} />
 
+        {/*         <motion.div className="size-52 bg-indigo-500 rounded-xl" style={{ rotate }} onMouseLeave={()=>{controlsRef.current?.play()}} onMouseEnter={()=>{controlsRef.current?.pause()}}></motion.div>
+         */}
 
         <div className="absolute">
           <motion.button

@@ -1,49 +1,127 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import axios from "axios";
+import { useState } from "react";
 
-const contactSchema = z.object({
-    name: z.string().min(1, 'Name is required'),
-    email: z.string().email('Invalid email format'),
-    message: z.string().min(5, 'Message must be at least 5 characters'),
-});
+import './Spinner.scss'
 
-const ContactForm = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: zodResolver(contactSchema),
-    });
+const Spinner = () => {
+  return (
+    <div className="spinner-container">
+      <div className="spinner"></div>
+    </div>
+  );
+};
 
-    const onSubmit = (data: any) => {
-        console.log('Form data:', data);
 
-    };
+interface ContactFormProps {
+  setFlashMessage: Function;
+}
 
-    return (
-        <form onSubmit={handleSubmit(onSubmit)} className="p-6 w-full mx-auto text-light-shade rounded-xl space-y-4">
-            <div className="mb-4">
-                <label htmlFor="name" className="block  font-bold mb-2">Name:</label>
-                <input type="text" id="name" {...register('name')} 
-                       className="w-full border border-gray-200 text-black p-2 rounded-lg focus:outline-none focus:border-blue-500" />
-                {errors.name && <p className="text-red-500 text-xs italic mt-2">{errors.name.message as string}</p>}
-            </div>
-            <div className="mb-4">
-                <label htmlFor="email" className="block  font-bold mb-2">Email:</label>
-                <input type="email" id="email" {...register('email')} 
-                       className="w-full border border-gray-200 p-2 text-black rounded-lg focus:outline-none focus:border-blue-500"/>
-                {errors.email && <p className="text-red-500 text-xs italic mt-2">{errors.email.message as string}</p>}
-            </div>
-            <div className="mb-4">
-                <label htmlFor="message" className="block  font-bold mb-2">Message:</label>
-                <textarea id="message" {...register('message')} 
-                          className="w-full border border-gray-200 p-2 text-black rounded-lg focus:outline-none focus:border-blue-500"></textarea>
-                {errors.message && <p className="text-red-500 text-xs italic mt-2">{errors.message.message as string}</p>}
-            </div>
-            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Submit
+const ContactForm: React.FC<ContactFormProps> = ({ setFlashMessage }) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    const formProps = { ...formData };
+
+    console.log("formProps", formProps);
+
+    try {
+      await axios.post("/api/send-mail", formProps);
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+      });
+      setFlashMessage({
+        message: "Message sent successfully!",
+        type: "success",
+        active: true,
+      });
+    } catch (error) {
+      setFlashMessage({
+        message: "Something went wrong, please try again.",
+        type: "error",
+        active: true
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  return (
+<section id="contact" className="container mx-auto py-12 px-4"> 
+  <div className="contact-form-container p-8">
+    <h2 className="contact-form-header text-2xl font-semibold mb-6">Contact Me</h2> 
+    <form className="contact-form" onSubmit={handleSubmit}>
+      <div className="input-container mb-4"> 
+        <label htmlFor="name" className="block text-light-shade font-medium mb-2">Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Nelson Bighetti"
+          value={formData.name}
+          onChange={handleChange}
+          className="w-full border border-gray-300 rounded-md px-3 py-2 text-slate-700 focus:outline-none focus:border-blue-500" 
+        />
+      </div>
+
+          <div className="input-container">
+          <label htmlFor="name" className="block text-light-shade font-medium mb-2">
+              Email:</label>
+              <input
+                type="text"
+                name="email"
+                placeholder="big_head@hooli.com"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full border border-gray-300 rounded-md px-3 py-2 text-slate-700 focus:outline-none focus:border-blue-500" 
+              />
+          </div>
+
+          <div className="input-container">
+          <label htmlFor="name" className="block text-light-shade font-medium mb-2">
+              Message:         </label>
+              <textarea
+                name="message"
+                placeholder="Always blue..."
+                value={formData.message}
+                onChange={handleChange}
+                className="w-full border border-gray-300 rounded-md px-3 py-2 text-slate-700 focus:outline-none focus:border-blue-500" 
+              />
+   
+          </div>
+
+          <div className="flex items-center justify-center mt-6"> 
+
+            <button
+              type="submit"
+              className="text-slate-100 bg-blue-500 hover:bg-blue-700 font-semibold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? <Spinner /> : "Submit"}
             </button>
+          </div>
         </form>
-    );
+      </div>
+    </section>
+  );
 };
 
 export default ContactForm;

@@ -3,20 +3,11 @@
 import Header from "./components/header/Header";
 import MainSheet from "./components/sheets/MainSheet";
 import NavContainer from "./components/nav/NavContainer";
-
 import { PortfolioProvider } from "./context/contextProvider";
-import SocialMediaLinks from "./components/SocialLinks/SocialLinksList";
-import { FiLinkedin } from "react-icons/fi";
-import { FaTwitter } from "react-icons/fa";
-import { FaGithub } from "react-icons/fa";
-import { FaPhone } from "react-icons/fa";
-import { FaEnvelope } from "react-icons/fa";
-import { FaFileAlt } from "react-icons/fa";
-
-import BallCanvas from "./components/RotatingCube";
 import { useScroll, motion, useAnimate } from "framer-motion";
 import { useRef } from "react";
 import SocialMediaLink from "./components/SocialLinks/SocialMediaLinks";
+import socialMediaLinks from "../app/content/socialMediaLinks";
 
 export default function Home() {
   const ref = useRef<HTMLDivElement>(null);
@@ -27,45 +18,7 @@ export default function Home() {
     offset: ["end end", "start start"],
   });
 
-  const socialMediaLinks = [
-    {
-      title: "linkedin",
-      href: "https://www.linkedin.com/in/zacharysturman/",
-      icon: FiLinkedin,
-      svg: "/social/linkedin.svg",
-    },
-    {
-      title: "twitter",
-      href: "https://twitter.com/zachary_sturman",
-      icon: FaTwitter,
-      svg: "/social/twitter.svg",
-    },
-    {
-      title: "github",
-      href: "https://github.com/ZSturman",
-      icon: FaGithub,
-      svg: "/social/github.svg",
-    },
-    {
-      title: "phone",
-      href: "tel:+61426233374",
-      icon: FaPhone,
-      svg: "/social/phone.svg",
-    },
-    {
-      title: "email",
-      href: "mailto:zasturman@gmail.com",
-      icon: FaEnvelope,
-      svg: "/social/email.svg",
-    },
-    {
-      title: "resume",
-      href: "/Zachary_Sturman_Resume.pdf",
-      icon: FaFileAlt,
-      svg: "/social/resume.svg",
-    },
-  ];
-
+  const svgMeasurement = 200;
 
   return (
     <div
@@ -75,7 +28,10 @@ export default function Home() {
       <Header />
 
 
-      <div className=" w-full items-center justify-center flex flex-row gap-10 sticky top-10 z-40">
+
+      <div
+        className={`w-full items-center justify-center flex flex-row gap-10 sticky top-4 z-40`}
+      >
         {socialMediaLinks.map((link, index) => {
           return (
             <motion.div
@@ -100,7 +56,6 @@ export default function Home() {
 
       <PortfolioProvider>
         <MainSheet />
-
         <NavContainer />
       </PortfolioProvider>
     </div>

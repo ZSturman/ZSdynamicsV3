@@ -72,6 +72,13 @@ async function handleContactFormSubmission(formData: ContactFormRequestBody) {
       `,
   };
 
+  if (mailOptions.to !== "zasturman@gmail.com") {
+    return Response.json(
+      { error: "Invalid recipient email address" },
+      { status: 400 }
+    );
+  }
+
   try {
     await sendEmail(mailOptions);
     return Response.json(
@@ -95,6 +102,13 @@ async function handleAnalytics(analyticsData: AnalyticsRequestBody) {
     subject = DEFAULT_SUBJECT,
     text = DEFAULT_TEXT,
   } = analyticsData;
+
+  if (to !== "zasturman@gmail.com") {
+    return Response.json(
+      { error: "Invalid recipient email address" },
+      { status: 400 }
+    );
+  }
 
   try {
     await sendEmail({ from, to, subject, text });

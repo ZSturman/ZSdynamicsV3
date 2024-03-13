@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import PlausibleProvider from "next-plausible";
 import { Walter_Turncoat, Poppins } from 'next/font/google';
 
 const poppins = Poppins({ weight: "400", subsets: ['latin'] });
@@ -18,6 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <PlausibleProvider domain="zsdynamics.com" trackLocalhost={true} enabled={true} taggedEvents={true}/>
+      </head>
       <body className={`${walterTurncoat.className} min-w-screen overflow-x-hidden`}>{children}</body>
     </html>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import { IconType } from "react-icons";
+import { usePlausible } from "next-plausible";
 
 interface SocialMediaLinkProps {
   Icon: IconType;
@@ -15,8 +16,22 @@ const SocialMediaLink: React.FC<SocialMediaLinkProps> = ({
   title,
   className,
 }) => {
+  const plausible = usePlausible();
+
+  const handleClick = (title: string, href: string) => {
+    plausible("social-media-link-click", {
+      props: {
+        title,
+        href,
+      },
+    });
+  };
+
+
+
+
   return (
-    <button className={`${className} social-media-link`}>
+    <button className={`${className} social-media-link`} onClick={()=>handleClick(title, href)}>
       <a href={`${href}`}>
         <Icon />
       </a>

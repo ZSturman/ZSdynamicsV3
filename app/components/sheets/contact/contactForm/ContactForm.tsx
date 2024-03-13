@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 
 import './Spinner.scss'
@@ -32,7 +31,13 @@ const ContactForm: React.FC<ContactFormProps> = ({ setFlashMessage }) => {
     console.log("formProps", formProps);
 
     try {
-      await axios.post("/api/send-mail", formProps);
+      await fetch("/api/send-mail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formProps),
+      });
       setFormData({
         name: "",
         email: "",

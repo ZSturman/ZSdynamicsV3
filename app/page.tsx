@@ -4,7 +4,7 @@ import Header from "./components/header/Header";
 import MainSheet from "./components/sheets/MainSheet";
 import NavContainer from "./components/nav/NavContainer";
 import { PortfolioProvider } from "./context/contextProvider";
-import { useScroll, motion, useAnimate } from "framer-motion";
+import {  motion, useAnimate } from "framer-motion";
 import { useRef } from "react";
 import SocialMediaLink from "./components/SocialLinks/SocialMediaLinks";
 import socialMediaLinks from "../app/content/socialMediaLinks";
@@ -12,13 +12,6 @@ import socialMediaLinks from "../app/content/socialMediaLinks";
 export default function Home() {
   const ref = useRef<HTMLDivElement>(null);
   const [scope, animate] = useAnimate();
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["end end", "start start"],
-  });
-
-  const svgMeasurement = 200;
 
   return (
     <div

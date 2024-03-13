@@ -3,8 +3,6 @@
 import type { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-
-
 type ContactFormRequestBody = {
   name: string;
   email: string;
@@ -50,9 +48,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
   // Distinguish between analytics and contact form submissions with Validation
   if (body.hasOwnProperty("name") && body.hasOwnProperty("email")) {
     await handleContactFormSubmission(body as ContactFormRequestBody);
-  } else {
+  } /* else {
     await handleAnalytics(body as AnalyticsRequestBody);
-  }
+  } */
 
   return Response.json(
     { message: "Request processed successfully" },
@@ -89,7 +87,7 @@ async function handleContactFormSubmission(formData: ContactFormRequestBody) {
     return Response.json({ error: "Email sending failed" }, { status: 500 });
   }
 }
-
+/* 
 async function handleAnalytics(analyticsData: AnalyticsRequestBody) {
   const DEFAULT_FROM = "zacharysturman@zsdynamics.com";
   const DEFAULT_TO = "zasturman@gmail.com";
@@ -120,3 +118,4 @@ async function handleAnalytics(analyticsData: AnalyticsRequestBody) {
     return Response.json({ error: "Email sending failed" }, { status: 500 });
   }
 }
+ */

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import {
   useScroll,
   useTransform,
@@ -15,8 +15,8 @@ const Header = () => {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [300, 10]); // Adjust range as needed
-  const scale = useTransform(scrollYProgress, [0, 0.8], [1, 0.5]); // Adjust scale values
-  const crushOffset = useTransform(scrollYProgress, [0, 0.8], [0, -10]); // Adjust offset
+
+
 
   return (
     <>

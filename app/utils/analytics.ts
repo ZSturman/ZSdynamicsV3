@@ -1,4 +1,4 @@
-type AnalyticsArgs = {
+/* type AnalyticsArgs = {
   retention?: number;
 };
 
@@ -74,3 +74,4 @@ export class Analytics {
 }
 
 export const analytics = new Analytics();
+ */

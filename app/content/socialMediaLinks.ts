@@ -38,7 +38,7 @@ const socialMediaLinks = [
     },
     {
       title: "resume",
-      href: "/Zachary_Sturman_Resume.pdf",
+      href: "/ZacharySturman_Resume.pdf",
       icon: FaFileAlt,
       svg: "/social/resume.svg",
     },

@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import LabBox from "./LabBox";
+import StudioBox from "./StudioBox";
 import Image from "next/image";
 import {
   motion,
@@ -13,7 +13,7 @@ function useParallax(value: MotionValue<number>, distance: number) {
   return useTransform(value, [0, 1], [-distance, distance]);
 }
 
-interface LabCardProps {
+interface StudioCardProps {
   project: {
     id: string;
     title: string;
@@ -22,7 +22,7 @@ interface LabCardProps {
   };
 }
 
-const LabCard: React.FC<LabCardProps> = ({ project }) => {
+const StudioCard: React.FC<StudioCardProps> = ({ project }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref });
   const y = useParallax(scrollYProgress, 300);
@@ -34,7 +34,7 @@ const LabCard: React.FC<LabCardProps> = ({ project }) => {
           <p>Project Description</p>
           
         </div>
-        <LabBox>
+        <StudioBox>
           <div>
             <Image
               src="/next.svg"
@@ -49,7 +49,7 @@ const LabCard: React.FC<LabCardProps> = ({ project }) => {
               height={200}
             />
           </div>
-        </LabBox>
+        </StudioBox>
       </div>
       <motion.div style={{ y }}>
       <motion.h1 className="text-3xl" >{project.title}</motion.h1>
@@ -63,4 +63,4 @@ const LabCard: React.FC<LabCardProps> = ({ project }) => {
 
 };
 
-export default LabCard;
+export default StudioCard;

@@ -1,8 +1,8 @@
 // MainSheet.jsx or wherever MainSheet is defined
 import { usePortfolio } from "@/app/context/contextProvider";
-import AboutSheet from "./about/AboutSheet";
+import BioSheet from "./bio/BioSheet";
 import ExperienceSheet from "./experience/ExperienceSheet";
-import LabSheet from "./lab/LabSheet";
+import StudioSheet from "./studio/StudioSheet";
 import ContactSheet from "./contact/ContactSheet";
 import { useTransform, useScroll, motion } from "framer-motion";
 import { useRef } from "react";
@@ -51,9 +51,9 @@ const MainSheet = ({}) => {
         </div>
 
         <div className="flex-1 px-5 py-5 flex items-start justify-center">
-          {selectedContent === "about" && <AboutSheet />}
+          {selectedContent === "bio" && <BioSheet />}
           {selectedContent === "experience" && <ExperienceSheet />}
-          {selectedContent === "lab" && <LabSheet />}
+          {selectedContent === "studio" && <StudioSheet />}
           {selectedContent === "contact" && <ContactSheet />}
         </div>
         <div className="sticky bottom-0 w-full h-48 flex items-center justify-center bg-gradient-to-t from-light-shade from-50% dark:from-dark-shade to-transparent rounded-b-xl"></div>

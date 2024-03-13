@@ -2,7 +2,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef } from "react";
 
-interface LabBoxProps {
+interface StudioBoxProps {
   children: React.ReactNode;
 }
 
@@ -75,7 +75,7 @@ const final = {
   },
 };
 
-const LabBox: React.FC<LabBoxProps> = ({ children }) => {
+const StudioBox: React.FC<StudioBoxProps> = ({ children }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -151,4 +151,4 @@ const LabBox: React.FC<LabBoxProps> = ({ children }) => {
   );
 };
 
-export default LabBox;
+export default StudioBox;

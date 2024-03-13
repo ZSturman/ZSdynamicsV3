@@ -6,7 +6,7 @@ import React, {
   ReactNode,
 } from "react";
 
-export const sheetSections = ["about", "experience", "lab", "contact"] as const
+export const sheetSections = ["bio", "experience", "studio", "contact"] as const
 
 export type SelectedContentType = typeof sheetSections[number];
 

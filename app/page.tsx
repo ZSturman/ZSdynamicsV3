@@ -27,8 +27,6 @@ export default function Home() {
     >
       <Header />
 
-
-
       <div
         className={`w-full items-center justify-center flex flex-row gap-10 sticky top-4 z-40`}
       >

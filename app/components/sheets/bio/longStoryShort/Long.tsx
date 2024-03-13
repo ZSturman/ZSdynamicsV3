@@ -1,6 +1,6 @@
 import React from "react";
 
-const LongAboutPage = () => {
+const LongBioPage = () => {
   return (
     <div className="container mx-auto px-8 pt-8 pb-12 ">
       <p className="mb-6 text-lg font-medium">
@@ -15,7 +15,7 @@ const LongAboutPage = () => {
           <p className="text-base">
             My core strengths lie in front-end development, with expertise in NextJS, React, 
             TypeScript, and a solid grasp of CSS frameworks and state management. I&apos;m passionate 
-            about UI/UX design, using tools like Figma and SketchBook to build user-centered 
+            Bio UI/UX design, using tools like Figma and SketchBook to build user-centered 
             interfaces. Performance optimization is always top of mind, ensuring fast and 
             responsive web experiences. My background in backend support, CI/CD, and AI tools 
             broadens my full-stack capabilities.
@@ -44,4 +44,4 @@ const LongAboutPage = () => {
   );
 };
 
-export default LongAboutPage;
+export default LongBioPage;

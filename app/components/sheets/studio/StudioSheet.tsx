@@ -1,4 +1,4 @@
-import LabCard from "./lab/LabCard";
+import StudioCard from "./studio/StudioCard";
 
 const projects = [
   {
@@ -65,12 +65,12 @@ const projects = [
 
 const publish = false;
 
-const LabSheet = () => {
+const StudioSheet = () => {
   return publish ? (
     <>
       <div className="flex flex-col gap-80 py-60">
         {projects.map((project) => (
-          <LabCard key={project.id} project={project} />
+          <StudioCard key={project.id} project={project} />
         ))}
       </div>
     </>
@@ -83,4 +83,4 @@ const LabSheet = () => {
   );
 };
 
-export default LabSheet;
+export default StudioSheet;

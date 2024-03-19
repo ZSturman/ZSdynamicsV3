@@ -8,7 +8,6 @@ import {
   animate,
   useMotionValue,
   motion,
-  useCycle,
 } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import { FaPersonFalling } from "react-icons/fa6";
@@ -84,12 +83,16 @@ const NavSvgComponent: React.FC<NavSvgComponentProps> = ({}) => {
   return (
     <>
       <motion.svg
-        width="270"
-        height="270"
+        width="135"
+        height="135"
         viewBox="0 0 1080 1080"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="overflow-visible"
+        className="overflow-visible z-50"
+
+        animate={{
+          scale: [1, 1.1, 1],
+        }}
       >
         <motion.circle
           id="bg"
@@ -101,7 +104,6 @@ const NavSvgComponent: React.FC<NavSvgComponentProps> = ({}) => {
           variants={circleVariants}
           animate={!navVisible ? "expanded" : "collapsed"}
           className="shadow-2xl"
-        
         />
         <motion.g
           style={{ rotate }}
@@ -207,7 +209,10 @@ const NavSvgComponent: React.FC<NavSvgComponentProps> = ({}) => {
           variants={toggleXVariants}
           initial={!navVisible ? "expanded" : "collapsed"}
           animate={!navVisible ? "collapsed" : "expanded"}
-          whileHover={{ scale: 1.2, shadow: "0px 10px 10px rgba(0, 0, 0, 0.5)"}}
+          whileHover={{
+            scale: 1.2,
+            shadow: "0px 10px 10px rgba(0, 0, 0, 0.5)",
+          }}
           filter="drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5))"
         >
           <circle

@@ -2,10 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Urbanist-Light";
+  src: url("../public/fonts/Urbanist/Urbanist-Light.ttf");
+}
+@font-face {
+  font-family: "Urbanist-Regular";
+  src: url("../public/fonts/Urbanist/Urbanist-Regular.ttf");
+}
+
+/* globals.css */
 :root {
   --light-shade: #fbfafb;
   --light-accent: #7f97ae;
   --main-brand: #9ba0a9;
   --dark-accent: #5c7a8d;
   --dark-shade: #212e3f;
+}
+
+.dark {
+  --light-shade: #212e3f;
+  --light-accent: #5c7a8d;
+
+  --dark-accent:  #7f97ae;
+  --dark-shade: #fbfafb;
+
 }

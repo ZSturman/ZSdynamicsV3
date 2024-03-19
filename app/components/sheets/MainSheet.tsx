@@ -18,8 +18,8 @@ const MainSheet = ({}) => {
 
   const y = useTransform(
     scrollYProgress,
-    [0, 1],
-    [0, 10]
+    [0, 1, 1.01],
+    [0, 10, 200]
   );
 
   const scaleY = useTransform(

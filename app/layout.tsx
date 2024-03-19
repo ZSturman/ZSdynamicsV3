@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import PlausibleProvider from "next-plausible";
 import { Walter_Turncoat, Poppins } from "next/font/google";
+import { ThemeProvider } from "./context/themeContext";
+
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 const walterTurncoat = Walter_Turncoat({ weight: "400", subsets: ["latin"] });
@@ -18,21 +19,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <PlausibleProvider
-          domain="zsdynamics.com"
-          trackLocalhost={true}
-          enabled={true}
-          taggedEvents={true}
-        />
-      </head>
-
-      <body
-        className={`${walterTurncoat.className} min-w-screen overflow-x-hidden`}
-      >
-        {children}
-      </body>
-    </html>
+    <ThemeProvider>
+      <html lang="en">
+        <body
+          className={`${walterTurncoat.className} min-w-screen min-h-screen overflow-x-hidden`}
+        >
+          {children}
+        </body>
+      </html>
+    </ThemeProvider>
   );
 }

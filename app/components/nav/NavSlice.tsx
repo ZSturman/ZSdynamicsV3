@@ -6,7 +6,6 @@ import {
 } from "@/app/context/contextProvider";
 import { motion, useTransform, useMotionValue } from "framer-motion";
 import React from "react";
-import NavSvgComponent from "./NavSvgComponent";
 
 interface NavSliceProps {
   navVisible: boolean;

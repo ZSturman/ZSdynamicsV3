@@ -1,13 +1,19 @@
 import type { Config } from "tailwindcss";
 
+
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: ['selector', '[data-mode="dark"]'],
   theme: {
     extend: {
+      fontFamily: {
+        'urbanist-light': "Urbanist-Light",
+        'urbanist-regular': "Urbanist-Regular",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -24,4 +30,7 @@ const config: Config = {
   },
   plugins: [],
 };
+
+
+
 export default config;

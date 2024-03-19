@@ -9,13 +9,6 @@ type ContactFormRequestBody = {
   message: string;
 };
 
-type AnalyticsRequestBody = {
-  from: string;
-  to: string;
-  subject: string;
-  text: string;
-};
-
 async function sendEmail(mailOptions: {
   from: string;
   to: string;
@@ -87,6 +80,7 @@ async function handleContactFormSubmission(formData: ContactFormRequestBody) {
     return Response.json({ error: "Email sending failed" }, { status: 500 });
   }
 }
+
 /* 
 async function handleAnalytics(analyticsData: AnalyticsRequestBody) {
   const DEFAULT_FROM = "zacharysturman@zsdynamics.com";

@@ -20,7 +20,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center min-h-72 relative">
+      <motion.div className="text-dark-shade flex flex-col justify-center items-center min-h-72 relative" initial={{ height: "100vh"}} animate={{ height: "30vh"}} transition={{ delay: 1, duration: 3}}>
         <div className="sticky">
           <motion.h1 className="text-6xl tracking-widest text-center ">
             Zachary Sturman
@@ -32,7 +32,7 @@ const Header = () => {
             Designing Stuff
           </motion.h1>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

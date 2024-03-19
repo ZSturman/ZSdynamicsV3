@@ -1,9 +1,12 @@
 "use client";
-import { usePortfolio } from "../context/contextProvider";
 import { motion } from "framer-motion";
 
-const LongStoryShort = () => {
-  const { justTheHighlights, setJustTheHighlights } = usePortfolio();
+interface LongStoryShortProps {
+  context: boolean;
+  setContext: (value: boolean) => void;
+}
+
+const LongStoryShort: React.FC<LongStoryShortProps> = ({context, setContext}) => {
 
   const spring = {
     type: "spring",
@@ -11,14 +14,18 @@ const LongStoryShort = () => {
     damping: 30,
   };
 
+  const toggleContext = () => {
+    setContext(!context);
+  }
+
   return (
-    <div className="relative w-full flex items-center justify-center">
+    <div className="relative w-96 flex items-center justify-center">
       <div
-        className="w-full h-[40px] bg-slate-300 flex rounded-xl cursor-pointer items-center p-1 relative"
+        className="w-full h-[20px] bg-dark-shade flex rounded-xl cursor-pointer items-center relative border-2 border-dark-shade"
         style={{
-          justifyContent: justTheHighlights ? "flex-start" : "flex-end",
+          justifyContent: !context ? "flex-start" : "flex-end",
         }}
-        onClick={() => setJustTheHighlights(!justTheHighlights)}
+        onClick={toggleContext}
       >
         <motion.div
           className="w-1/2 h-full rounded-xl"
@@ -32,14 +39,14 @@ const LongStoryShort = () => {
 
         <h1
           className={`${
-            justTheHighlights ? "text-white" : "text-black"
+            !context ? "text-white" : "text-black"
           }`}
         >
           Give me the gist
         </h1>
         <h1
           className={` px-5 ${
-            !justTheHighlights ? "text-white" : "text-black"
+            context ? "text-white" : "text-black"
           }`}
         >
           I&apos;ve got time

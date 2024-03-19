@@ -3,7 +3,6 @@ import "./globals.css";
 import { Walter_Turncoat, Poppins } from "next/font/google";
 import { ThemeProvider } from "./context/themeContext";
 
-
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 const walterTurncoat = Walter_Turncoat({ weight: "400", subsets: ["latin"] });
 
@@ -24,7 +23,9 @@ export default function RootLayout({
         <body
           className={`${walterTurncoat.className} min-w-screen min-h-screen overflow-x-hidden`}
         >
-          {children}
+          <div className="flex flex-col justify-center items-center">
+            {children}
+          </div>
         </body>
       </html>
     </ThemeProvider>

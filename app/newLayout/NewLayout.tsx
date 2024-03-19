@@ -107,7 +107,7 @@ const NewLayout: React.FC<NewLayoutProps> = ({}) => {
               <div className="w-full h-32 bg-light-accent"></div>
             </motion.div>
           </div>
-          <div className="absolute bottom-0 w-screen h-screen items-center -z-20 overflow-hidden">
+          <div className="absolute bottom-0 w-full h-screen items-center -z-20 overflow-hidden">
             <motion.svg
               viewBox="0 0 2290 1117"
               xmlns="http://www.w3.org/2000/svg"

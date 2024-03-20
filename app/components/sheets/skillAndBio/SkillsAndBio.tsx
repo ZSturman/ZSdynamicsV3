@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
 import SkillsList from "./components/skillsList";
 import Image from "next/image";
+import BioCard from "./bioCard";
 
 const SkillsAndBio = () => {
   const [context, setContext] = useState(true);
@@ -14,62 +15,30 @@ const SkillsAndBio = () => {
     exit: { scaleY: 0, scaleX: 2, opacity: 0 },
   };
 
-  return (
-    <>
-      {/* Bio Top */}
-      <div className="flex flex-col md:flex-row gap-0 items-center justify-center bg-slate-600 p-10">
-        {/* Left */}
-        <div className="flex items-center justify-center ">
-          <Image src="/ZsToon.png" width={400} height={200} alt="Toon" />
-        </div>
-        {/* right */}
-        <div className="flex flex-col items-center flex-1justify-evenly bg-slate-800 p-5">
-          <div className="w-full text-left text-3xl tracking-widest mb-2">
-            Skills <br /> &Bio
-          </div>
-          <div>
-            <p className="mb-6 text-lg font-medium">
-              I&apos;m a front-end developer specializing in crafting
-              exceptional user experiences through thoughtful UI/UX design and a
-              focus on performance optimization. My passion for cutting-edge
-              technologies drives my continuous learning and growth.
-            </p>
-          </div>
-          <div className="w-full flex flex-row items-right justify-between invisible md:visible">
-            <div className="w-1/2 md:w-3/4"></div>
-            <LongStoryShort context={context} setContext={setContext} />
-          </div>
-        </div>
-      </div>
-      {/* Divider */}
-      <div className="w-full h-2 bg-slate-900"></div>
-      {/* Skills */}
+  type BioDateType = {
+    from?: {
+      month?: string;
+      year: string;
+    };
+    to?: {
+      month?: string;
+      year: string;
+    };
+    on?: {
+      month?: string;
+      year: string;
+    };
+    onGoing?: boolean;
+  };
 
-      <SkillsList />
-      {/* Divider */}
-      <div className="w-full h-1 bg-slate-900"></div>
-      {/*Bullets */}
+  type BioCardType = {
+    date?: BioDateType;
+    headline: string;
+    subheader?: string;
+    content: string;
+  };
 
-      <div className="flex flex-col w-full gap-5 p-5">
-        <div className="w-full flex flex-row items-right justify-between visible md:invisible">
-          <LongStoryShort context={context} setContext={setContext} />
-        </div>
-        <div className="flex flex-col gap-1">
-          <h2 className="text-2xl font-bold mb-4">Work Experience</h2>
-
-          <AnimatePresence>
-            {context && (
-              <motion.div
-                className="text-base"
-                variants={contextVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-              >
-                <h2 className="text-2xl font-bold mb-4">
-                  Comprehensive Career Overview
-                </h2>
-                <ul className="list-disc list-inside space-y-2">
+  /*                 <ul className="list-disc list-inside space-y-2">
                   <li>
                     <h3 className="text-lg font-semibold mb-2">
                       Evo Sol (Senior Front-End Developer, October 2022 -
@@ -111,61 +80,10 @@ const SkillsAndBio = () => {
                       insights.
                     </p>
                   </li>
-                </ul>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-        <div className="flex flex-col gap-1">
-          <h2 className="text-2xl font-bold mb-4">Academic Achievements</h2>
+                </ul> 
 
-          <AnimatePresence>
-            {context && (
-              <div>
-                <motion.p
-                  className="text-base"
-                  variants={contextVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                >
-                  My educational background includes a Bachelor of Science in
-                  Media Communication from Full Sail University. I&apos;m
-                  committed to lifelong learning, holding certifications in data
-                  analytics and cloud computing to stay ahead in a rapidly
-                  changing field.
-                </motion.p>
-              </div>
-            )}
-          </AnimatePresence>
-        </div>
-        <div>
-          <h2 className="text-2xl font-bold mb-4">Career Highlights</h2>
-          <AnimatePresence>
-            {context && (
-              <div>
-                <motion.p
-                  className="text-base"
-                  variants={contextVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                >
-                  Throughout my career, I&apos;ve spearheaded the development of
-                  AI-driven applications, revamped digital strategies for
-                  greater impact, and created impactful data visualizations. I
-                  thrive on delivering tangible results that align with business
-                  objectives.
-                </motion.p>
-              </div>
-            )}
-          </AnimatePresence>
-        </div>
-        <div>
-          <h2 className="text-2xl font-bold mb-4">Areas of Expertise</h2>
-          <AnimatePresence>
-            {context && (
-              <div>
+
+                              <div>
                 <motion.p
                   className="text-base"
                   variants={contextVariants}
@@ -183,10 +101,114 @@ const SkillsAndBio = () => {
                   full-stack capabilities.
                 </motion.p>
               </div>
-            )}
-          </AnimatePresence>
+                
+                
+                
+                */
+
+  const bioCards = [
+    {
+      date: {
+        on: {
+          month: "Novemer",
+          year: "2014",
+        },
+      },
+      headline: "Bachelors of Science in Film",
+      subheader: "Full Sail University, Orlando, FL",
+      content:
+        "My educational background includes a Bachelor of Science in Media Communication from Full Sail University. I'm committed to lifelong learning, holding certifications in data analytics and cloud computing to stay ahead in a rapidly changing field.",
+    },
+    {
+      date: {
+        from: {
+          year: "2016",
+        },
+        to: {
+          year: "2017",
+        },
+      },
+      headline: "Data Analytics Certification",
+      content:
+        "I completed a comprehensive data analytics certification program, gaining expertise in data visualization, machine learning, and predictive analytics.",
+    },
+    {
+      date: {
+        from: {
+          year: "2017",
+        },
+        to: {
+          year: "2018",
+        },
+      },
+      headline: "Cloud Computing Certification",
+      content:
+        "I earned a cloud computing certification, mastering AWS, Azure, and Google Cloud Platform.",
+    },
+  ];
+
+  return (
+    <>
+      <div className="w-full h-screen bg-light-accent relative">
+        <div className="absolute top-0 w-full h-96">
+          <div className="flex flex-col w-full h-full">
+            <div className="flex flex-row justify-center px-5">
+              {/* Image */}
+              <div className="w-1/3 h-full relative">
+                <div className="w-96 h-96 rounded-full bg-light-accent absolute top-0 left-0 overflow-hidden m-5 shadow-lg">
+                  <Image src="/ZsToon.png" fill alt="Toon" />
+                </div>
+                <div className="w-96 h-96 rounded-full border-4 border-dark-shade/50 absolute top-0 left-0 overflow-hidden m-9 shadow-lg" />
+                <div className="w-48 h-48 rounded-full bg-light-accent absolute top-0 left-0 overflow-hidden mx-4 opacity-40 blur-md" />
+              </div>
+
+              {/* Title */}
+              <div className="flex flex-col items-center flex-1 justify-evenly bg-black/50 backdrop-blur-lg m-5 p-5 rounded-lg">
+                <div className="w-full text-left text-3xl tracking-widest mb-2">
+                  Skills <br /> &Bio
+                </div>
+                <div>
+                  <p className="mb-6 text-lg font-medium">
+                    I&apos;m a front-end developer specializing in crafting
+                    exceptional user experiences through thoughtful UI/UX design
+                    and a focus on performance optimization. My passion for
+                    cutting-edge technologies drives my continuous learning and
+                    growth.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full flex flex-row items-center justify-center ">
+              <LongStoryShort context={context} setContext={setContext} />
+            </div>
+
+            <div className="w-full flex flex-col mt-48">
+              {/* Bio Cards */}
+              {bioCards.map((bioCard, index) => (
+                <BioCard context={context} bioCard={bioCard} key={index} />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="w-full h-full flex flex-col justify-end">
+          <div className="flex flex-row flex-grow w-full">
+            <div className="w-1/3 h-full bg-light-shade" />
+            <div className="w-full h-full flex flex-col">
+              <div className="h-1/5 w-full bg-black/30" />
+            </div>
+          </div>
         </div>
       </div>
+
+      <div className="w-full h-1 bg-slate-900" />
+      <h1>Make this static</h1>
+      <SkillsList />
+
+      <div className="w-full h-32 bg-slate-900" />
+
+      
     </>
   );
 };

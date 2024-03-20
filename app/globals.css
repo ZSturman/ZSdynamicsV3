@@ -19,7 +19,6 @@
   --dark-shade: #212e3f;
 }
 
-
 ::-webkit-scrollbar {
   width: 0px;
   height: 0px;
@@ -29,6 +28,61 @@
 .dark {
   --light-shade: #212e3f;
   --light-accent: #5c7a8d;
-  --dark-accent:  #7f97ae;
+  --dark-accent: #7f97ae;
   --dark-shade: #fbfafb;
+}
+
+
+.nightsky-base {
+  background: linear-gradient(
+     /* We'll decide the angle in a moment */
+     black 20%, /* Adjust starting percentage as needed */
+     rgb(38, 38, 94) 75%,
+     rgb(78, 78, 104) 85%,     
+     rgb(255, 0, 0) 100% /* Adjust end color if needed */
+  );
+}
+
+
+.nightsky-overlay-1 { 
+  background: inherit; /* Inherit from nightsky-base */
+  background-image: linear-gradient(205deg, /* Angle change */
+    black 0%,
+    rgb(81, 81, 255) 70%,
+    rgb(255, 0, 0) 100%);
+} 
+
+.nightsky-overlay-2 {
+  background: inherit; /* Inherit from nightsky-base */
+  background-image: linear-gradient(180deg, /* Angle change */
+    black 50%,
+    rgb(38, 38, 94) 65%,
+    rgb(192, 95, 95) 85%,
+    rgb(143, 155, 56) 100%);
+}
+
+.nightsky-overlay-3 {
+  background: inherit; /* Inherit from nightsky-base */
+  background-image: linear-gradient(
+    190deg, /* Angle change */
+     black 50%,
+     rgb(255, 255, 255) 100% 
+  );
+}
+
+.daytime {
+  background: linear-gradient(
+    180deg, /* Angle change */
+    rgb(177, 236, 249) 0%,
+    rgb(104, 199, 218) 100%
+  );
+}
+.daytime-overlay-1 {
+  background-image: linear-gradient(
+    90deg, 
+     rgb(255, 179, 0) 0%,
+     rgba(0, 255, 234, 0) 100% 
+  );
+  opacity: .5;
+
 }

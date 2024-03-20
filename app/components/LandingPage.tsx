@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   motion,
   useAnimationControls,
@@ -9,10 +9,12 @@ import { useEffect, useRef } from "react";
 import landscapeBG from "./landingPage/landingPageSvgs";
 import Header from "./landingPage/Header";
 import NavLinks from "./navLinks/NavLinks";
+import { useTheme } from "../context/themeContext";
 
 interface LandingPageProps {}
 
 const LandingPage: React.FC<LandingPageProps> = ({}) => {
+  const { theme } = useTheme();
   const navBarRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: navBarRef,
@@ -26,11 +28,31 @@ const LandingPage: React.FC<LandingPageProps> = ({}) => {
     ["1%", "150%"]
   );
 
-  const skyAnimationVariant = {
-    hidden: { opacity: 0 },
-    visible: {
+  const daytimeVariant = {
+    init: {
+      opacity: 0
+    },
+    enter: {
       opacity: 1,
-      transition: { duration: 2 },
+      transition: {
+        duration: 2,
+      },
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: 2,
+      },
+    }
+  };
+
+  const navVariant = {
+    init: { scale: 1.2, filter: "blur(100px)", y: 200 },
+    final: {
+      scale: 1,
+      filter: "blur(0px)",
+      y: 0,
+      transition: { delay: 0.5, duration: 1.5 },
     },
   };
 
@@ -38,6 +60,15 @@ const LandingPage: React.FC<LandingPageProps> = ({}) => {
     controls.set("init");
     controls.start("final");
   }, [controls]);
+
+  useEffect(() => {
+    if (theme === "dark") {
+      controls.start("exit");
+    } else {
+      controls.start("enter");
+    }
+  }, [theme, controls]);
+
 
   const z40 = useTransform(scrollYProgress, [0, 1], [0, 1700]);
   const z35 = useTransform(scrollYProgress, [0, 1], [0, 1600]);
@@ -72,6 +103,26 @@ const LandingPage: React.FC<LandingPageProps> = ({}) => {
     }
   };
 
+  const skyContainerVariant = {
+    final: {
+      transition: {
+        staggerChildren: 1,
+      },
+    },
+  };
+
+  const skyOverlayVariant = {
+    init: {
+      opacity: 0,
+    },
+    final: {
+      opacity: 0.3,
+      transition: {
+        duration: 1,
+      },
+    },
+  };
+
   return (
     <>
       <div className="w-full h-screen text-dark-shade relative">
@@ -85,24 +136,14 @@ const LandingPage: React.FC<LandingPageProps> = ({}) => {
           <div className="absolute bottom-0 w-full -z-10">
             <motion.div
               className="flex flex-col h-full justify-end items-end"
-              initial={{
-                scale: 1.2,
-                filter: "blur(100px)",
-                y: 200,
-              }}
-              animate={{
-                scale: 1,
-                filter: "blur(0px)",
-                y: 0,
-
-                transition: { delay: 0.5, duration: 1.5 },
-              }}
+              animate={controls}
+              variants={navVariant}
             >
               <div className="flex w-full flex-row items-end justify-between px-10">
                 {/* bird */}
                 <motion.div className="h-20 w-12 bg-dark-accent invisible md:visible" />
                 {/* - -  Person */}
-                <motion.div className="h-36 w-24 md:h-72 md:w-48 bg-dark-accent"/>
+                <motion.div className="h-36 w-24 md:h-72 md:w-48 bg-dark-accent" />
               </div>
               <div className="w-full h-32 bg-light-accent"></div>
             </motion.div>
@@ -164,12 +205,28 @@ const LandingPage: React.FC<LandingPageProps> = ({}) => {
               })}
             </motion.svg>
           </div>
+
           <motion.div
-            className="absolute top-0 left-0 bg-black w-full h-screen -z-50"
-            variants={skyAnimationVariant}
-            initial="hidden"
-            animate="visible"
-          />
+            variants={skyContainerVariant}
+            animate={controls}
+            className="absolute top-0 left-0 w-full h-screen -z-50 bg-black"
+          >
+            <motion.div
+              variants={skyOverlayVariant}
+              className=" absolute top-0 left-0 w-full h-full nightsky-base nightsky-overlay-3"
+            />
+            <motion.div
+              variants={skyOverlayVariant}
+              className=" absolute top-0 left-0 w-full h-full nightsky-base nightsky-overlay-2"
+            />
+            <motion.div
+              variants={skyOverlayVariant}
+              className=" absolute top-0 l≈eft-0 w-full h-full nightsky-base nightsky-overlay-1"
+            />
+
+            <motion.div variants={daytimeVariant} animate={controls} className=" absolute top-0 left-0 w-full h-full daytime"/>
+            
+          </motion.div>
         </div>
       </div>
     </>

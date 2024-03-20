@@ -1,21 +1,22 @@
 "use client";
-import NewLayout from "./newLayout/NewLayout";
-import ContentSection from "./newLayout/ContentSection";
+import LandingPage from "./components/LandingPage";
+import ContentSection from "./components/ContentSection";
 import { Suspense } from "react";
+import LoaderOne from "./loaders/svgs";
 
 export default function Home() {
   return (
-    <div className="max-w-[1400px]">
-      <div className="flex flex-col justify-center items-center">
-      <NewLayout />
+    <div className="flex flex-col justify-center items-center">
+      <div className="w-screen xl:max-w-[1400px]">
+        <LandingPage />
 
-      <div className="w-full h-1 bg-slate-900"></div>
+        <div className="w-full h-1 bg-slate-900"></div>
 
-      <Suspense fallback={<div>Loading...</div>}>
-        <ContentSection />
-      </Suspense>
+
+        <Suspense fallback={     <LoaderOne />}>
+          <ContentSection />
+        </Suspense>
       </div>
-      </div>
-    
+    </div>
   );
 }

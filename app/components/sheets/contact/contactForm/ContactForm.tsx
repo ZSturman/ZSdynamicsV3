@@ -70,7 +70,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ setFlashMessage }) => {
   };
 
   return (
-<section id="contact" className="container mx-auto py-12 px-4"> 
+<section id="contact" className="container mx-auto py-12 sm:px-4 "> 
   <div className="contact-form-container p-8">
     <h2 className="contact-form-header text-2xl font-semibold mb-6">Contact Me</h2> 
     <form className="contact-form" onSubmit={handleSubmit}>

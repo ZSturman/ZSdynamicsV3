@@ -1,4 +1,3 @@
-"use client";
 import { motion } from "framer-motion";
 
 interface LongStoryShortProps {
@@ -35,17 +34,18 @@ const LongStoryShort: React.FC<LongStoryShortProps> = ({context, setContext}) =>
           whileHover={{ backgroundColor: "#555", scale: 1.1 }}
         />
 
-        <div className="absolute flex flex-row w-full justify-evenly items-center ">
+        <div className="absolute flex flex-row w-full justify-evenly items-center text-sm">
+          
 
         <h1
-          className={`${
+          className={` text-nowrap ${
             !context ? "text-white" : "text-black"
           }`}
         >
           Give me the gist
         </h1>
         <h1
-          className={` px-5 ${
+          className={`text-nowrap  px-5 ${
             context ? "text-white" : "text-black"
           }`}
         >

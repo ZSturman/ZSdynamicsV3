@@ -11,7 +11,6 @@
   src: url("../public/fonts/Urbanist/Urbanist-Regular.ttf");
 }
 
-/* globals.css */
 :root {
   --light-shade: #fbfafb;
   --light-accent: #7f97ae;
@@ -20,11 +19,16 @@
   --dark-shade: #212e3f;
 }
 
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  background: transparent;
+}
+
 .dark {
   --light-shade: #212e3f;
   --light-accent: #5c7a8d;
-
   --dark-accent:  #7f97ae;
   --dark-shade: #fbfafb;
-
 }

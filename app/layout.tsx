@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Walter_Turncoat, Poppins } from "next/font/google";
-import { ThemeProvider } from "./context/themeContext";
 
-const poppins = Poppins({ weight: "400", subsets: ["latin"] });
-const walterTurncoat = Walter_Turncoat({ weight: "400", subsets: ["latin"] });
+import { ThemeProvider } from "./context/themeContext";
 
 export const metadata: Metadata = {
   title: "Zachary Sturman - Full Stack Front End Developer",
@@ -21,7 +18,7 @@ export default function RootLayout({
     <ThemeProvider>
       <html lang="en">
         <body
-          className={`${walterTurncoat.className} min-w-screen min-h-screen overflow-x-hidden`}
+          className={`min-w-screen min-h-screen overflow-x-hidden`}
         >
           <div className="flex flex-col justify-center items-center">
             {children}

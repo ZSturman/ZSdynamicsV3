@@ -11,16 +11,27 @@ const NavLinks = () => {
 
   const selectedContent = searchParams.get("content");
 
+  const handleNavClick = (page: string) => {
+    router.push(`?${new URLSearchParams({ content: page }).toString()}`, { scroll: false})
+    const section = document.querySelector("#contentSection");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+
+
   return (
     <div className="w-full flex flex-row justify-evenly items-center">
       <button
-        onClick={() => router.replace(`?${new URLSearchParams({ content: "bio" }).toString()}`, { scroll: false})}
+
+        onClick={() => handleNavClick("bio")}
         className="flex flex-col items-center justify-center py-5"
       >
         <div className={`h-12 w-12 sm:h-16 sm:w-16 text-3xl flex justify-center items-center rounded-full ${selectedContent === "bio" && "bg-dark-accent"}`}><FaUserTie /></div>Bio
       </button>
       <button
-        onClick={() => router.replace(`?${new URLSearchParams({ content: "studio" }).toString()}`, { scroll: false})}
+        onClick={() => handleNavClick("studio")}
         className="flex flex-col items-center justify-center py-5"
         
       >
@@ -29,7 +40,7 @@ const NavLinks = () => {
           </div>Studio
       </button>
       <button
-        onClick={() => router.replace(`?${new URLSearchParams({ content: "workflow" }).toString()}`, { scroll: false})}
+        onClick={() => handleNavClick("workflow")}
         className="flex flex-col items-center justify-center py-5"
         
       >
@@ -38,7 +49,7 @@ const NavLinks = () => {
           </div>Workflow
       </button>
       <button
-        onClick={() => router.replace(`?${new URLSearchParams({ content: "contact" }).toString()}`, { scroll: false})}
+        onClick={() => handleNavClick("contact")}
         className="flex flex-col items-center justify-center py-5"
         
       >

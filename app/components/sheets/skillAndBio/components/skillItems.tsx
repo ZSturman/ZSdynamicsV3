@@ -8,27 +8,23 @@ import { FaHtml5 } from "react-icons/fa6";
 import { IoLogoCss3 } from "react-icons/io5";
 import { SiSass } from "react-icons/si";
 import { FaBootstrap } from "react-icons/fa6";
-import { FaAngular } from "react-icons/fa6";
 import { SiJest } from "react-icons/si";
 import { SiWebpack } from "react-icons/si";
 import { FaGitAlt } from "react-icons/fa6";
 import { FaNodeJs } from "react-icons/fa6";
-import { SiDjango } from "react-icons/si";
 import { SiFlask } from "react-icons/si";
-import { SiMongodb } from "react-icons/si";
 import { SiPostgresql } from "react-icons/si";
 import { SiMysql } from "react-icons/si";
 import { SiSqlite } from "react-icons/si";
-import { SiGraphql } from "react-icons/si";
-import { SiApollographql } from "react-icons/si";
 import { SiDocker } from "react-icons/si";
-import { SiKubernetes } from "react-icons/si";
 import { SiReactrouter } from "react-icons/si";
 import { SiAxios } from "react-icons/si";
-import { SiLodash } from "react-icons/si";
 import { SiTestinglibrary } from "react-icons/si";
 import { SiRedux } from "react-icons/si";
-import { MdOutlineHttp } from "react-icons/md";
+import { SiNextdotjs } from "react-icons/si";
+import { SiTailwindcss } from "react-icons/si";
+
+
 
 const skillsList = [
   {
@@ -37,18 +33,23 @@ const skillsList = [
     category: "Programming Languages",
   },
   {
-    name: "JavaScript",
+    name: "Java Script",
     icon: <SiJavascript />,
     category: "Programming Languages",
   },
   {
-    name: "TypeScript",
+    name: "Type Script",
     icon: <SiTypescript />,
     category: "Programming Languages",
   },
   {
     name: "React",
     icon: <FaReact />,
+    category: "Front-End Libraries/Frameworks",
+  },
+  {
+    name: "Next.js",
+    icon: <SiNextdotjs/>,
     category: "Front-End Libraries/Frameworks",
   },
   {
@@ -62,12 +63,17 @@ const skillsList = [
     category: "Front-End Technologies",
   },
   {
+    name: "Tailwind CSS",
+    icon: <SiTailwindcss />,
+    category: "Front-End Technologies",
+  },
+  {
     name: "Sass",
     icon: <SiSass />,
     category: "Front-End Technologies",
   },
   {
-    name: "Bootstrap",
+    name: "Boot strap",
     icon: <FaBootstrap />,
     category: "Front-End Technologies",
   },
@@ -77,17 +83,12 @@ const skillsList = [
     category: "Front-End Libraries/Frameworks",
   },
   {
-    name: "Angular",
-    icon: <FaAngular />,
-    category: "Front-End Libraries/Frameworks",
-  },
-  {
     name: "Jest",
     icon: <SiJest />,
     category: "Testing",
   },
   {
-    name: "Webpack",
+    name: "Web pack",
     icon: <SiWebpack />,
     category: "Build Tools",
   },
@@ -96,11 +97,6 @@ const skillsList = [
     icon: <FaGitAlt />,
     category: "Version Control",
   },
-  {
-    name: "REST APIs",
-    icon: <MdOutlineHttp />,
-    category: "Web Concepts",
-  },
 
   {
     name: "Node.js",
@@ -108,18 +104,7 @@ const skillsList = [
 
     category: "Back-End Technologies",
   },
-  {
-    name: "Express",
-    icon: <FaNodeJs />,
 
-    category: "Back-End Technologies",
-  },
-  {
-    name: "Django",
-    icon: <SiDjango />,
-
-    category: "Back-End Technologies",
-  },
   {
     name: "Flask",
     icon: <SiFlask />,
@@ -127,13 +112,7 @@ const skillsList = [
     category: "Back-End Technologies",
   },
   {
-    name: "MongoDB",
-    icon: <SiMongodb />,
-
-    category: "Databases",
-  },
-  {
-    name: "PostgreSQL",
+    name: "Postgre SQL",
     icon: <SiPostgresql />,
 
     category: "Databases",
@@ -151,26 +130,8 @@ const skillsList = [
     category: "Databases",
   },
   {
-    name: "GraphQL",
-    icon: <SiGraphql />,
-
-    category: "APIs",
-  },
-  {
-    name: "Apollo GraphQL",
-    icon: <SiApollographql />,
-
-    category: "APIs",
-  },
-  {
     name: "Docker",
     icon: <SiDocker />,
-
-    category: "DevOps",
-  },
-  {
-    name: "Kubernetes",
-    icon: <SiKubernetes />,
 
     category: "DevOps",
   },
@@ -185,11 +146,7 @@ const skillsList = [
     icon: <SiAxios />,
     category: ["web-development-frameworks"],
   },
-  {
-    name: "Lodash",
-    icon: <SiLodash />,
-    category: ["utility-libraries"],
-  },
+
   {
     name: "React Testing Library",
     icon: <SiTestinglibrary />,

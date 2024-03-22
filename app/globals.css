@@ -13,8 +13,8 @@
 
 :root {
   --light-shade: #fbfafb;
-  --light-accent: #7f97ae;
-  --main-brand: #9ba0a9;
+  --light-accent: #c7d5e1;
+  --main-brand: #828da2;
   --dark-accent: #5c7a8d;
   --dark-shade: #212e3f;
 }
@@ -28,6 +28,7 @@
 .dark {
   --light-shade: #212e3f;
   --light-accent: #5c7a8d;
+
   --dark-accent: #7f97ae;
   --dark-shade: #fbfafb;
 }

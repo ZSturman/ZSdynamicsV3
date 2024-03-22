@@ -5,11 +5,14 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import landscapeBG from "./landingPage/landingPageSvgs";
 import Header from "./landingPage/Header";
 import NavLinks from "./navLinks/NavLinks";
 import { useTheme } from "../context/themeContext";
+import LoaderOne from "../loaders/svgs";
+import FgPersonSvgComponent from "./landingPage/landingPageSvgs/FgPersonSvgComponent";
+import { cubicBezier } from "framer-motion"
 
 interface LandingPageProps {}
 
@@ -30,7 +33,7 @@ const LandingPage: React.FC<LandingPageProps> = ({}) => {
 
   const daytimeVariant = {
     init: {
-      opacity: 0
+      opacity: 0,
     },
     enter: {
       opacity: 1,
@@ -43,16 +46,18 @@ const LandingPage: React.FC<LandingPageProps> = ({}) => {
       transition: {
         duration: 2,
       },
-    }
+    },
   };
 
   const navVariant = {
-    init: { scale: 1.2, filter: "blur(100px)", y: 200 },
+    init: { scale: 1.9, filter: "blur(20px)", y: 100, x: 100 },
     final: {
       scale: 1,
-      filter: "blur(0px)",
+      filter: "blur(1px)",
       y: 0,
-      transition: { delay: 0.5, duration: 1.5 },
+      x: 0,
+      transition: { duration: 2.2, type: "tween", ease: "easeOut"  },
+      
     },
   };
 
@@ -68,7 +73,6 @@ const LandingPage: React.FC<LandingPageProps> = ({}) => {
       controls.start("enter");
     }
   }, [theme, controls]);
-
 
   const z40 = useTransform(scrollYProgress, [0, 1], [0, 1700]);
   const z35 = useTransform(scrollYProgress, [0, 1], [0, 1600]);
@@ -130,22 +134,28 @@ const LandingPage: React.FC<LandingPageProps> = ({}) => {
           <div className="sticky top-0 w-full z-50 mb-20">
             <Header />
           </div>
-          <div className="absolute bottom-0 w-full h-32 z-50" ref={navBarRef}>
-            <NavLinks />
+          <div id="contentSection"  className="absolute bottom-0 w-full h-32 z-50" ref={navBarRef}>
+            <Suspense fallback={<LoaderOne />}>
+              <NavLinks />
+            </Suspense>
           </div>
           <div className="absolute bottom-0 w-full -z-10">
             <motion.div
               className="flex flex-col h-full justify-end items-end"
               animate={controls}
               variants={navVariant}
+              initial="init"
             >
-              <div className="flex w-full flex-row items-end justify-between px-10">
+              <div className="flex w-full flex-row items-end justify-end px-10 lg:px-32 xl:px-64">
                 {/* bird */}
-                <motion.div className="h-20 w-12 bg-dark-accent invisible md:visible" />
+                {/* <motion.div className="h-20 w-12 bg-dark-accent invisible md:visible" /> */}
                 {/* - -  Person */}
-                <motion.div className="h-36 w-24 md:h-72 md:w-48 bg-dark-accent" />
+                
+                <motion.div>
+                  <FgPersonSvgComponent />
+                </motion.div>
               </div>
-              <div className="w-full h-32 bg-light-accent"></div>
+              <div className="w-full h-32 bg-light-accent" />
             </motion.div>
           </div>
           <div className="absolute bottom-0 w-full h-screen items-center -z-20 overflow-hidden">
@@ -224,8 +234,11 @@ const LandingPage: React.FC<LandingPageProps> = ({}) => {
               className=" absolute top-0 l≈eft-0 w-full h-full nightsky-base nightsky-overlay-1"
             />
 
-            <motion.div variants={daytimeVariant} animate={controls} className=" absolute top-0 left-0 w-full h-full daytime"/>
-            
+            <motion.div
+              variants={daytimeVariant}
+              animate={controls}
+              className=" absolute top-0 left-0 w-full h-full daytime"
+            />
           </motion.div>
         </div>
       </div>

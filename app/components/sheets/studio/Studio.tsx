@@ -1,47 +1,19 @@
-import StudioCard from "./studio/StudioCard";
-import React, { useRef } from "react";
+import { useRef, useState } from "react";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import {studioProjectsList} from "./studio/studioProjects";
 
-const projects = [
-  {
-    id: "1",
-    title: "Project One",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    link: "Go to One",
-    image: "/next.svg",
-    color: "#00B4F5",
-  },
-  {
-    id: "2",
-    title: "Project Two",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    link: "Go to Two",
-    image: "/vercel.svg",
-    color: "#FF0080",
-  },
-  {
-    id: "3",
-    title: "Project Three",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    link: "Go to Three",
-    image: "/next.svg",
-    color: "black",
-  },
-];
+
 
 const publish = true;
 
 const Studio = () => {
   return publish ? (
     <div className="w-full h-full">
-      <h1 className="text-center text-3xl m-3">Projects</h1>
+      
       <div className="w-full h-full flex flex-row justify-center items-center">
-        <StickyScroll projects={projects.map((project) => ({ project }))} />
+        <StickyScroll projects={studioProjectsList.map((project) => ({ project }))} />
       </div>
     </div>
   ) : (
@@ -55,6 +27,13 @@ const Studio = () => {
 
 export default Studio;
 
+
+/* 
+
+https://ui.aceternity.com/components/images-slider
+
+*/
+
 interface StudioCardProps {
   project: {
     id: string;
@@ -67,7 +46,7 @@ interface StudioCardProps {
 }
 
 const StickyScroll = ({ projects }: { projects: StudioCardProps[] }) => {
-  const [activeCard, setActiveCard] = React.useState(0);
+  const [activeCard, setActiveCard] = useState(0);
   const ref = useRef<any>(null);
   const { scrollYProgress } = useScroll({
     container: ref,
@@ -91,7 +70,7 @@ const StickyScroll = ({ projects }: { projects: StudioCardProps[] }) => {
   });
 
   return (
-    <div className="max-w-[900px] w-[250px] sm:w-[500px] md:w-[750px] lg:w-[900px] rounded-xl shadow-lg">
+    <div className="max-w-[900px] w-screen md:w-[750px] lg:w-[900px] rounded-xl shadow-lg">
       <motion.div
         className={`h-[30rem] overflow-y-auto flex justify-center relative space-x-10 rounded-md p-2 md:p-10 `}
         style={{ backgroundColor: projects[activeCard].project.color }}

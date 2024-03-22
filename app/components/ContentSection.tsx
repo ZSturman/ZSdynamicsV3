@@ -1,11 +1,12 @@
-"use client"
+"use client";
 import { AnimatePresence, motion } from "framer-motion";
 import Contact from "./sheets/contact/Contact";
 import Studio from "./sheets/studio/Studio";
 import SkillsAndBio from "./sheets/skillAndBio/SkillsAndBio";
 import { useSearchParams } from "next/navigation";
 import WorkflowPipeline from "./sheets/workflowPipeline/WorkflowPipeline";
-import DefaultSheet from "./sheets/defaultSheet/defaultSheet";
+import HomePage from "./sheets/homePage/HomePage";
+import WrongLocation from "./sheets/wrongLocation/WrongLocation";
 
 interface ContentSectionProps {}
 
@@ -14,7 +15,7 @@ const ContentSection: React.FC<ContentSectionProps> = ({}) => {
 
   const hasContent = searchParams.has("content");
   const selectedContent = searchParams.get("content");
-  const pages = ["bio", "studio", "workflow", "contact"]
+  const pages = ["bio", "studio", "workflow", "contact"];
 
   const pageRevealVariants = {
     hidden: { x: "100vw" },
@@ -40,7 +41,7 @@ const ContentSection: React.FC<ContentSectionProps> = ({}) => {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="bg-light-accent text-dark-shade w-full flex flex-col justify-start items-center"
+              className="text-dark-shade w-full flex flex-col justify-start items-center"
               key={"bio"}
             >
               <SkillsAndBio />
@@ -54,7 +55,7 @@ const ContentSection: React.FC<ContentSectionProps> = ({}) => {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="bg-light-accent text-dark-shade w-full flex flex-col justify-start items-center"
+              className="text-dark-shade w-full flex flex-col justify-start items-center"
               key={"studio"}
             >
               <Studio />
@@ -68,7 +69,7 @@ const ContentSection: React.FC<ContentSectionProps> = ({}) => {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="bg-light-accent text-dark-shade w-full flex flex-col justify-start items-center"
+              className="text-dark-shade w-full flex flex-col justify-start items-center"
               key={"workflow"}
             >
               <WorkflowPipeline />
@@ -82,27 +83,41 @@ const ContentSection: React.FC<ContentSectionProps> = ({}) => {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="bg-light-accent text-dark-shade w-full flex flex-col justify-start items-center"
+              className="text-dark-shade w-full flex flex-col justify-start items-center"
               key={"contact"}
             >
               <Contact />
             </motion.div>
           )}
 
-          {!hasContent || !pages.includes(selectedContent ?? "") && (
-            /* Default Page */
-            <motion.div
-              variants={pageRevealVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              className="bg-light-accent text-dark-shade w-full flex flex-col justify-start items-center"
-              key={"default"}
-            >
-              <DefaultSheet />
-            </motion.div>
-          )}
+          {!hasContent ||
+            (!pages.includes(selectedContent ?? "") && (
+              /* Wrong Location */
+              <motion.div
+                variants={pageRevealVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="h-full w-full flex flex-col justify-start items-center"
+                key={"default"}
+              >
+                <WrongLocation />
+              </motion.div>
+            ))}
 
+          {!hasContent && (
+              /* Home Page */
+              <motion.div
+                variants={pageRevealVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className=" w-full flex flex-col justify-start items-center"
+                key={"default"}
+              >
+                <HomePage />
+              </motion.div>
+            )}
         </AnimatePresence>
       </div>
     </>

@@ -5,7 +5,7 @@ import SkillCard from "./skillCard";
 import skillsList from "./skillItems";
 import useMeasure from "react-use-measure";
 
-const SkillsList = () => {
+const SkillsListScrolling = () => {
   const [ref, { width }] = useMeasure();
   const controls = useAnimation();
 
@@ -76,4 +76,4 @@ const SkillsList = () => {
   );
 };
 
-export default SkillsList;
+export default SkillsListScrolling;

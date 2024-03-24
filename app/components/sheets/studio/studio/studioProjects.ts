@@ -5,7 +5,7 @@ export const studioProjectsList = [
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       link: "Go to One",
-      image: "/next.svg",
+      image: "/animals/quokka.jpeg",
       color: "#00B4F5",
     },
     {
@@ -14,7 +14,7 @@ export const studioProjectsList = [
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       link: "Go to Two",
-      image: "/vercel.svg",
+      image: "/animals/dogAndCat.jpeg",
       color: "#FF0080",
     },
     {
@@ -23,7 +23,7 @@ export const studioProjectsList = [
       description:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       link: "Go to Three",
-      image: "/next.svg",
+      image: "/animals/highlandCow.jpeg",
       color: "black",
     },
   ];

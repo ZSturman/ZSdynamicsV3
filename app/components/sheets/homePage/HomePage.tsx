@@ -1,13 +1,21 @@
 import React from "react";
-import Link from "next/link"
+import UnderConstruction from "../UnderConstruction";
 
 const HomePage = () => {
+  const publish = false
+
+  if (!publish) {
+    return (
+      <UnderConstruction />
+    )
+  }
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center bg-light-accent">
-      
-
       <div className="text-dark-shade text-center text-2xl hover:text-3xl cursor-pointer">
         Hello.
+      </div>
+      <div className="text-dark-shade text-center  cursor-pointer">
+        More is coming here later. Come back later to see it in action
       </div>
     </div>
   );
@@ -15,6 +23,13 @@ const HomePage = () => {
 
 export default HomePage;
 
+/* 
+
+
+for clouds and water
+https://codepen.io/wakana-k/pen/jORywbO 
+
+*/
 
 
 /* 

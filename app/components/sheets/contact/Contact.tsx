@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import ContactForm from "./contactForm/ContactForm";
 import { motion } from "framer-motion";
-import socialMediaLinks from "../../landingPage/socialLinks";
+import socialMediaLinks from "../../landingPage/header/socialLinks";
 
 const ContactSheet = () => {
   const [flashMessage, setFlashMessage] = useState({

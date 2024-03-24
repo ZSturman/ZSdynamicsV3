@@ -6,6 +6,7 @@ import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 import { pipelineStages } from "./pipelineStages";
 import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
+import UnderConstruction from "../UnderConstruction";
 
 const WorkflowPipeline = () => {
   const searchParams = useSearchParams();
@@ -45,32 +46,38 @@ const WorkflowPipeline = () => {
     const prevPage = (index - 1).toString();
     currentSearchParams.set("stage", prevPage);
     router.push(`?${currentSearchParams.toString()}`, { scroll: false });
-    
   };
 
   const cardVariant = {
     initial: { x: "100vw" },
     enterFromRight: {
       x: ["100vw", 0],
-      transition: { duration: .7 },
+      transition: { duration: 0.7 },
     },
     enterFromLeft: {
       x: ["-100vw", 0],
-      transition: { duration: .7 },
+      transition: { duration: 0.7 },
     },
     exitToLeft: {
       x: [0, "-100vw"],
-      transition: { duration: .7 },
+      transition: { duration: 0.7 },
     },
     exitToRight: {
       x: [0, "100vw"],
-      transition: { duration: .7 },
+      transition: { duration: 0.7 },
     },
   };
 
+  const publish = false;
+
+  if (!publish) {
+    return <UnderConstruction />;
+  }
+
+
   return (
     <>
-      <div className="mt-40 relative">
+      <div className="landscape:mt-10 mt-20 md:mt-40 md:landscape:mt-20 relative">
         <AnimatePresence mode="wait">
           {pipelineStages.map((stage, index) => {
             if (index.toString() === activeStage) {
@@ -79,10 +86,11 @@ const WorkflowPipeline = () => {
                   key={stage.id}
                   variants={cardVariant}
                   initial="initial"
-                  animate={index > prevStage ? "enterFromRight" : "enterFromLeft"}
+                  animate={
+                    index > prevStage ? "enterFromRight" : "enterFromLeft"
+                  }
                   exit={index > prevStage ? "exitToRight" : "exitToLeft"}
                 >
-                  
                   <StageCard stage={stage} />
 
                   <div className=" mt-60 flex flex-row w-full gap-2 items-center justify-center">
@@ -132,62 +140,3 @@ const WorkflowPipeline = () => {
 };
 
 export default WorkflowPipeline;
-
-/* 
-
-
-                <motion.div
-                  key={stage.id}
-                  variants={pageRevealVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                >
-                  <div
-                    className="relative z-50  cursor-pointer"
-                    onMouseEnter={onMouseEnter}
-                    onMouseLeave={onMouseLeave}
-                  >
-                    <div
-                      style={{
-                        perspective: "1000px",
-                        transform: "rotateX(70deg) translateZ(0deg)",
-                      }}
-                      className="absolute left-1/2 top-1/2 ml-[0.09375rem] mt-4 -translate-x-1/2 -translate-y-1/2"
-                    >
-                      <div
-                        style={{
-                          transform: transform,
-                        }}
-                        className="absolute left-1/2 p-4 top-1/2  flex justify-start items-start  rounded-2xl transition duration-700 overflow-hidden"
-                      >
-                        <div className=" relative z-10 ">
-                          <StageCard stage={stage} />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className=" mt-60 flex flex-row w-full gap-2 items-center justify-center">
-                    {index > 0 && (
-                      <button
-                        onClick={() => handlePrevStage(index)}
-                        className="mt-4 px-4 py-2 rounded bg-blue-500 text-white"
-                      >
-                        <FaCaretLeft />
-                      </button>
-                    )}
-
-                    {index < pipelineStages.length - 1 && (
-                      <button
-                        onClick={() => handleNextStage(index)}
-                        className="mt-4 px-4 py-2 rounded bg-blue-500 text-white"
-                      >
-                        <FaCaretRight />
-                      </button>
-                    )}
-                  </div>
-                </motion.div>
-                
-                
-                */

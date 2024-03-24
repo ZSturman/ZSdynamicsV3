@@ -1,5 +1,5 @@
 "use client";
-import { useState, FC } from "react";
+import { useState, FC, useEffect } from "react";
 import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
 import { useTheme } from "@/app/context/themeContext";
 
@@ -13,31 +13,44 @@ const SkillCard: FC<SkillCardProps> = ({ name, category, icon }) => {
   const [showOverlay, setShowOverlay] = useState(false);
   const { theme } = useTheme();
 
-  
+  const toggleOverlay = () => setShowOverlay(!showOverlay);
 
-
-
+  useEffect(() => {
+    let timerId: NodeJS.Timeout;
+    if (showOverlay) {
+      // Start a timer when the overlay is shown
+      timerId = setTimeout(() => {
+        setShowOverlay(false);
+      }, 3000); // Adjust time as needed, here it's set to 3 seconds
+    }
+    return () => clearTimeout(timerId); // Cleanup the timer on component unmount or when showOverlay changes
+  }, [showOverlay]);
 
   return (
     <>
-      <motion.div className="sm:hidden flex flex-col w-full items-center justify-center group hover:bg-dark-accent hover:text-light-shade hover:p-3 transition-all duration-100 text-dark-shade">
+      <motion.div className="sm:hidden flex flex-col w-full items-center justify-center group hover:bg-dark-accent hover:text-light-shade hover:p-3 transition-all duration-100 text-dark-shade"
+              onHoverStart={() => setShowOverlay(true)}
+              onHoverEnd={() => setShowOverlay(false)}
+          onTap={toggleOverlay} >
         <div className="flex flex-row w-full justify-center items-center  gap-2 ">
-          <div className="text-3xl text-dark-shade group-hover:text-light-shade">{icon}</div>
-          <div className="text-dark-shade group-hover:text-light-shade">{name}</div>
+          <div className="text-3xl text-dark-shade group-hover:text-light-shade">
+            {icon}
+          </div>
+          <div className="text-dark-shade group-hover:text-light-shade">
+            {name}
+          </div>
         </div>
 
-        <motion.div
-          className="text-center invisible group-hover:visible"
-
-        >
+        <motion.div className="text-center invisible group-hover:visible">
           {category}
         </motion.div>
       </motion.div>
 
       <motion.div
-        className="hidden sm:block relative rounded-lg border-4 border-dark-shade p-2 overflow-hidden"
+        className="hidden sm:block relative rounded-lg border-2 border-dark-shade p-2 overflow-hidden"
         onHoverStart={() => setShowOverlay(true)}
         onHoverEnd={() => setShowOverlay(false)}
+        onTap={toggleOverlay} 
       >
         <AnimatePresence>
           {showOverlay && (

@@ -29,7 +29,7 @@
   --light-shade: #212e3f;
   --light-accent: #5c7a8d;
 
-  --dark-accent: #7f97ae;
+  --dark-accent: #5b6d7d;
   --dark-shade: #fbfafb;
 }
 
@@ -86,4 +86,14 @@
   );
   opacity: .5;
 
+}
+
+@keyframes waterWave {
+  0%   { offset-position: 0% 100%; } 
+  50%  { offset-position: 100% 100%; }
+  100% { offset-position: 0% 100%; }
+}
+
+#water {
+   animation: waterWave 3s linear infinite; 
 }

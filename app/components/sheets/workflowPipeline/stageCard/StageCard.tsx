@@ -118,7 +118,7 @@ const StageCard: FC<StageCardProps> = ({ stage }) => {
                   </ul>
                 </div>
               </div>
-              <div className="absolute bottom-0 w-full h-80 bg-slate-400 rounded-md shadow-lg transition-shadow duration-300 ease-in-out group-hover:shadow-[0_20px_16px_rgb(0_0_0/0.4)]" />
+              <div className="absolute bottom-0 w-full h-80 bg-light-shade rounded-md shadow-lg transition-shadow duration-300 ease-in-out group-hover:shadow-[0_20px_16px_rgb(0_0_0/0.4)]" />
             </div>
           </div>
         </div>

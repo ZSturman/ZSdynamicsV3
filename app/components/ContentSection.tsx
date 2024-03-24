@@ -29,6 +29,7 @@ const ContentSection: React.FC<ContentSectionProps> = ({}) => {
     },
   };
 
+
   return (
     <>
       {/* Content */}

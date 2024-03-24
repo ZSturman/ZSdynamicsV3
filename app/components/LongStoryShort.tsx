@@ -45,7 +45,7 @@ const LongStoryShort: React.FC<LongStoryShortProps> = ({
         onClick={toggleContext}
       >
         <motion.div
-          className={`w-1/2 h-full rounded-md md:rounded-xl hover:bg-dark-accent bg-light-accent text-dark-shade shadow-md hover:shadow-lg`}
+          className={`w-1/2 h-full rounded-md md:rounded-xl hover:bg-dark-accent bg-dark-accent text-dark-shade shadow-md hover:shadow-lg`}
           layout
           variants={toggleButtonVariant}
           whileHover={"whileHover"}
@@ -56,7 +56,7 @@ const LongStoryShort: React.FC<LongStoryShortProps> = ({
           <motion.h1
             className={`text-nowrap ${
               !context
-                ? theme === "light" ? "text-light-shade" :"text-dark-shade"
+                ? theme === "light" ? "text-light-shade " :"text-dark-shade"
                 : theme === "light" ? "text-dark-shade opacity-60" : "text-light-shade opacity-60" }
             }`}
           >

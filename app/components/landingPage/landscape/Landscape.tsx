@@ -1,10 +1,10 @@
-import { motion, useTransform } from "framer-motion"
-import landscapeBG from "./landingPageSvgs"
+import { easeIn, motion, useSpring, useTransform } from "framer-motion";
+import landscapeBG from "./landingPageSvgs";
 import { useScrollContext } from "@/app/context/scrollContext";
 import { useTheme } from "@/app/context/themeContext";
 import { useEffect } from "react";
 
-const Landscape = ({ controls }: {controls: any}) => {
+const Landscape = ({ controls }: { controls: any }) => {
   const { scrollYProgress } = useScrollContext();
   const { theme } = useTheme();
 
@@ -17,8 +17,6 @@ const Landscape = ({ controls }: {controls: any}) => {
   const z15 = useTransform(scrollYProgress, [0, 1], [0, 970]);
   const z10 = useTransform(scrollYProgress, [0, 1], [0, 900]);
   const z5 = useTransform(scrollYProgress, [0, 1], [0, 750]);
-
-  
 
   const getParallaxEffect = (zIndex: number) => {
     switch (zIndex) {
@@ -62,7 +60,7 @@ const Landscape = ({ controls }: {controls: any}) => {
   const svgContainerVariant = {
     init: {
       y: 0,
-      transform: 'translateZ(0)',
+      transform: "translateZ(0)",
     },
     final: {
       y: -32,
@@ -72,31 +70,36 @@ const Landscape = ({ controls }: {controls: any}) => {
     },
   };
 
-
   return (
     <motion.svg
-    viewBox="0 0 1728 1265"
-    xmlns="http://www.w3.org/2000/svg"
-    className="w-full absolute bottom-0 bg-transparent"
-    variants={svgContainerVariant}
-    initial="init"
-    animate={controls}
-    style={{ willChange: 'transform' }}
-  >
-    <motion.rect
-      style={{ y: groundParallaxScale }}
-      id="water"
-      fill={`url(#waterGradient)`}
-      className={`w-full h-full`}
-    />
-    <defs>
-      <linearGradient id="waterGradient" x1="0" x2="0" y1="0" y2="1">
-        <stop offset="40%" stopColor="transparent" />
-        <stop offset="40%" stopColor="#b1ecf9" />
-        <stop offset="40.5%" stopColor="#4A90E2" />
-      </linearGradient>
+      viewBox="0 0 1728 1265"
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-full absolute bottom-0 bg-transparent"
+      variants={svgContainerVariant}
+      initial="init"
+      animate={controls}
+      style={{ willChange: "transform" }}
+    >
+      <motion.rect
+        style={{ y: groundParallaxScale }}
+        id="water"
+        fill={`url(#waterGradient)`}
+        className={`w-full h-full`}
+      />
+      <defs>
+        <linearGradient id="waterGradient" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="40%" stopColor="transparent" />
+          <stop offset="40%" stopColor="#b1ecf9" />
+          <stop offset="40.5%" stopColor="#4A90E2" />
+        </linearGradient>
+        <linearGradient id="dayGradient" x1="0" x2="0" y1="0" y2="1">
+          {/* Define your day gradient stops here */}
+        </linearGradient>
+        <linearGradient id="nightGradient" x1="0" x2="0" y1="0" y2="1">
+          {/* Define your night gradient stops here */}
+        </linearGradient>
 
-      {/* 
+        {/* 
               <linearGradient id="waterGradient" x1="0" x2="0" y1="0" y2="1">
           <stop offset="38%" stopColor="transparent" stop-opacity="0.2" />
           <stop offset="40%" stopColor="#90d4f1" />
@@ -105,61 +108,57 @@ const Landscape = ({ controls }: {controls: any}) => {
           <stop offset="55%" stopColor="#4A90E2" />
           <stop offset="65%" stopColor="#b1ecf9" stop-opacity="0.4" />
         </linearGradient> */}
-    </defs>
+      </defs>
 
+      {landscapeBG.map((layer, index) => {
+        return (
+          <motion.g
+            key={index}
+            variants={layer.variants}
+            initial="init"
+            animate={controls}
+            style={{ y: getParallaxEffect(layer.zIndex) }}
+            className={`-z[${layer.zIndex}]`}
+          >
+            {layer.leftGroup.g && (
+              <motion.g variants={layer.leftGroup.g.variants}>
+                {layer.leftGroup.g.paths.map((path, index) => {
+                  return (
+                    <motion.path
+                      transition={{ duration: 0 }}
+                      key={index}
+                      d={path.d}
+                      fill={path.fill}
+                      stroke={path.stroke}
+                      variants={path.variants}
+                      animate={theme === "dark" ? "night" : "day"}
+                    />
+                  );
+                })}
+              </motion.g>
+            )}
 
-    {landscapeBG.map((layer, index) => {
-      return (
-        <motion.g
-          key={index}
-          variants={layer.variants}
-          initial="init"
-          animate={controls}
-          style={{ y: getParallaxEffect(layer.zIndex) }}
-          className={`-z[${layer.zIndex}]`}
-        >
-          {layer.leftGroup.g && (
-            <motion.g variants={layer.leftGroup.g.variants}>
-              {layer.leftGroup.g.paths.map((path, index) => {
-                return (
-                  <motion.path
-                    transition={{ duration: 0 }}
-                    key={index}
-                    d={path.d}
-                    fill={path.fill}
-                    stroke={path.stroke}
-                    variants={path.variants}
-                    animate={controls}
-                    
-                  />
-                );
-              })}
-            </motion.g>
-          )}
+            {layer.rightGroup.g && (
+              <motion.g>
+                {layer.rightGroup.g.paths.map((path, index) => {
+                  return (
+                    <motion.path
+                      key={index}
+                      d={path.d}
+                      fill={path.fill}
+                      stroke={path.stroke}
+                      variants={path.variants}
+                      animate={theme === "dark" ? "night" : "day"}
+                    />
+                  );
+                })}
+              </motion.g>
+            )}
+          </motion.g>
+        );
+      })}
+    </motion.svg>
+  );
+};
 
-          {layer.rightGroup.g && (
-            <motion.g
-
-            >
-              {layer.rightGroup.g.paths.map((path, index) => {
-                return (
-                  <motion.path
-                    key={index}
-                    d={path.d}
-                    fill={path.fill}
-                    stroke={path.stroke}
-                    variants={path.variants}
-                    animate={controls}
-                  />
-                );
-              })}
-            </motion.g>
-          )}
-        </motion.g>
-      );
-    })}
-  </motion.svg>
-  )
-}
-
-export default Landscape
+export default Landscape;

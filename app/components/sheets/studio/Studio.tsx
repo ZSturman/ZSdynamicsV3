@@ -2,25 +2,22 @@ import { useRef, useState } from "react";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { studioProjectsList } from "./studio/studioProjects";
+import { studioProjectsList, StudioCardType } from "./studio/studioProjects";
 import UnderConstruction from "../UnderConstruction";
-
+import { useTheme } from "@/app/context/themeContext";
 
 const Studio = () => {
-
-  const publish = false;
+  const publish = true;
 
   if (!publish) {
     return <UnderConstruction />;
   }
 
-
-
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full p-20">
       <div className="w-full h-full flex flex-row justify-center items-center">
         <StickyScroll
-          projects={studioProjectsList.map((project) => ({ project }))}
+          projects={studioProjectsList}
         />
       </div>
     </div>
@@ -29,18 +26,8 @@ const Studio = () => {
 
 export default Studio;
 
-interface StudioCardProps {
-  project: {
-    id: string;
-    title: string;
-    description: string;
-    link: string;
-    image: string;
-    color: string;
-  };
-}
-
-const StickyScroll = ({ projects }: { projects: StudioCardProps[] }) => {
+const StickyScroll = ({ projects }: { projects: StudioCardType[] }) => {
+  const { theme } = useTheme();
   const [activeCard, setActiveCard] = useState(0);
   const ref = useRef<any>(null);
   const { scrollYProgress } = useScroll({
@@ -64,19 +51,40 @@ const StickyScroll = ({ projects }: { projects: StudioCardProps[] }) => {
     setActiveCard(closestBreakpointIndex);
   });
 
-
   return (
     <>
       <div className="max-w-[900px] w-screen md:w-[750px] lg:w-[900px] rounded-xl shadow-lg">
         <motion.div
           className={`flex h-[30rem] overflow-y-auto justify-center relative space-x-10 rounded-md p-2 md:p-10 `}
-          style={{ backgroundColor: projects[activeCard].project.color }}
+          style={{
+            backgroundColor:
+              theme === "dark"
+                ? projects[activeCard].colors.dark
+                : projects[activeCard].colors.light,
+            color:
+              theme === "dark"
+                ? projects[activeCard].colors.light
+                : projects[activeCard].colors.dark,
+          }}
           ref={ref}
         >
           <div className="div relative flex items-start px-4">
             <div className="max-w-2xl">
               {projects.map((project, index) => (
-                <div key={project.project.title + index} className="my-20">
+                <div key={project.title + index} className="mt-5 mb-20">
+                  <div>
+                    <motion.h3
+                      initial={{
+                        opacity: 0,
+                      }}
+                      animate={{
+                        opacity: activeCard === index ? 1 : 0.3,
+                      }}
+                      className="text-kg text-sm"
+                    >
+                      {project.date}
+                    </motion.h3>
+                  </div>
                   <motion.h2
                     initial={{
                       opacity: 0,
@@ -84,9 +92,9 @@ const StickyScroll = ({ projects }: { projects: StudioCardProps[] }) => {
                     animate={{
                       opacity: activeCard === index ? 1 : 0.3,
                     }}
-                    className="text-2xl font-bold text-slate-100"
+                    className="text-2xl font-bold mb-5"
                   >
-                    {project.project.title}
+                    {project.title}
                   </motion.h2>
                   <motion.p
                     initial={{
@@ -95,10 +103,26 @@ const StickyScroll = ({ projects }: { projects: StudioCardProps[] }) => {
                     animate={{
                       opacity: activeCard === index ? 1 : 0.3,
                     }}
-                    className="text-kg text-slate-300 max-w-sm mt-10"
+                    className="text-kg  max-w-sm"
                   >
-                    {project.project.description}
+                    {project.description}
                   </motion.p>
+
+                  {project.bulletPoints && (
+                    <motion.ul
+                      initial={{
+                        opacity: 0,
+                      }}
+                      animate={{
+                        opacity: activeCard === index ? 1 : 0.3,
+                      }}
+                      className="max-w-sm m-3 list-disc indent-3"
+                    >
+                      {project.bulletPoints.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </motion.ul>
+                  )}
 
                   <motion.button
                     initial={{
@@ -107,9 +131,14 @@ const StickyScroll = ({ projects }: { projects: StudioCardProps[] }) => {
                     animate={{
                       opacity: activeCard === index ? 1 : 0.3,
                     }}
-                    className="text-kg text-slate-300 max-w-sm mt-10"
+                    className="rounded-lg p-2 mt-5"
+                    style={{
+                      border: `3px solid ${projects[activeCard].colors.light}`,
+                    }}
                   >
-                    {project.project.link ?? null}
+                    <a href={project.link ?? "www.zsdynamics.com"}>
+                      {project.buttonName ?? "View Project"}
+                    </a>
                   </motion.button>
                 </div>
               ))}
@@ -117,12 +146,13 @@ const StickyScroll = ({ projects }: { projects: StudioCardProps[] }) => {
             </div>
           </div>
           <motion.div className="hidden md:block h-96 w-96 rounded-md shadow-lg sticky top-0 bg-slate-100/20 overflow-hidden">
-            <div className="flex justify-center items-center w-full h-full">
+            <div className="absolute justify-center items-center w-full h-full overflow-hidden">
               <Image
-                src={projects[activeCard].project.image}
+                src={projects[activeCard].image}
                 alt="Project Image"
-                width={200}
-                height={200}
+                fill
+                style={{objectFit: "cover"}}
+                priority
               />
             </div>
           </motion.div>

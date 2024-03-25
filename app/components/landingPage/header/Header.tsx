@@ -1,12 +1,8 @@
-import { FC, use, useEffect, useRef } from "react";
+import { FC, useEffect } from "react";
 import {
-  MotionValue,
   motion,
-  useMotionValue,
-  useTransform,
 } from "framer-motion";
 import socialMediaLinks from "./socialLinks";
-import ThemeToggle from "@/app/components/ToggleTheme";
 import { useScrollContext } from "@/app/context/scrollContext";
 
 interface HeaderProps {
@@ -14,19 +10,14 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({ controls }) => {
-  const { scrollYProgress } = useScrollContext();
 
   useEffect(() => {
     controls.start("headerEnter");
+
+    return () => {
+      controls.stop()
+    };
   }, [controls]);
-
-
-
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.01, 1.5]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 0.7], [1, 1, 0]);
-  const scaleX = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.1, 2]);
-  const scaleY = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.1, .2]);
-  const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   const jobTitleVariant = {
     init: {
@@ -60,7 +51,7 @@ const Header: FC<HeaderProps> = ({ controls }) => {
       opacity: 1,
       scaleY: 1,
       transition: {
-        delay: .5,
+        delay: 0.5,
         duration: 1,
         ease: "easeOut",
       },
@@ -95,32 +86,33 @@ const Header: FC<HeaderProps> = ({ controls }) => {
   };
 
 
+
   return (
     <div className="flex flex-col relative h-full">
-      <motion.div className="p-5 md:p-20" 
-      style={{ scale, opacity, scaleX, scaleY, y}}
+      <motion.div
+        className="p-5 md:p-20"
       >
         <motion.div
-          className="w-full flex items-center text-5xl justify-center font-urbanist-light"
+          className="w-full flex items-center text-lg md:text-xl lg:text-3xl xl:text-4xl justify-center font-urbanist-light"
           variants={jobTitleVariant}
           animate={controls}
           initial="init"
           exit="headerExit"
-    
         >
           - Developer -
         </motion.div>
 
-        <motion.div className="w-full flex items-center justify-center text-9xl mb-5 md:mb-10 font-urbanist-light"
-        animate={controls}
-        variants={nameVariant}
-        initial="init"
-        exit="headerExit"
+        <motion.div
+          className="w-full flex items-center justify-center text-4xl md:text-6xl lg:text-7xl xl:text-9xl mb-5 md:mb-10 font-urbanist-light"
+          animate={controls}
+          variants={nameVariant}
+          initial="init"
+          exit="headerExit"
         >
           Zachary Sturman
         </motion.div>
 
-        <motion.div className="w-full flex flex-row flex-wrap gap-8 md:gap-10 items-center justify-center" >
+        <motion.div className="w-full flex flex-row flex-wrap gap-8 md:gap-10 items-center justify-center">
           {socialMediaLinks.map((link, index) => {
             return (
               <motion.div
@@ -135,7 +127,7 @@ const Header: FC<HeaderProps> = ({ controls }) => {
                   href={link.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-lg md:text-2xl hover:cursor-pointer"
+                  className="text md:text-lg lg:text-2xl hover:cursor-pointer"
                 >
                   <link.icon />
                 </a>
@@ -144,12 +136,8 @@ const Header: FC<HeaderProps> = ({ controls }) => {
           })}
         </motion.div>
 
-        <div className="absolute top-0 right-0 p-5">
-        <ThemeToggle />
-      </div>
+
       </motion.div>
-
-
     </div>
   );
 };

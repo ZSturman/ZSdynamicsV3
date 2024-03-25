@@ -4,8 +4,10 @@ import {
   useAnimationControls,
   useInView,
   useScroll,
+  useSpring,
+  useTransform,
 } from "framer-motion";
-import { Suspense, useEffect, useMemo, useRef } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 
 import Header from "./landingPage/header/Header";
 import NavLinks from "./navLinks/NavLinks";
@@ -14,20 +16,20 @@ import LoaderOne from "../loaders/svgs";
 import FgPersonSvgComponent from "./landingPage/landscape/landingPageSvgs/FgPersonSvgComponent";
 import ScrollContext from "../context/scrollContext";
 import Landscape from "./landingPage/landscape/Landscape";
+import ThemeToggle from "./ToggleTheme";
 
 interface LandingPageProps {}
 
 const LandingPage: React.FC<LandingPageProps> = ({}) => {
   const { theme } = useTheme();
   const navBarRef = useRef(null);
-  const landingPage = useRef(null);
-  const isInView = useInView(landingPage, { once: true, amount: 1 });
+
 
   const controls = useAnimationControls();
 
   const { scrollYProgress } = useScroll({
     target: navBarRef,
-    offset: ["end end", "end start"],
+    offset: ["end end", "start start"],
   });
 
   const scrollValue = useMemo(() => ({ scrollYProgress }), [scrollYProgress]);
@@ -103,23 +105,69 @@ const LandingPage: React.FC<LandingPageProps> = ({}) => {
     },
   };
 
+
+
+
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on('change',(latestValue) => {
+     (latestValue >.95 ? controls.start("inNav") : controls.start("inSky"));
+    });
+
+    return () => unsubscribe();
+  }, [scrollYProgress, controls]);
+
+  const headerVariant = {
+    inSky: {
+      scale: 1,
+      transition: {
+        duration: .4,
+        type: "tween",
+        ease: "easeInOut",
+      },
+    },
+    inNav: {
+      scale: .25,
+      transition: {
+        duration: .4,
+        type: "tween",
+        ease: "easeInOut",
+      },
+    },
+  }
+
+
   return (
     <ScrollContext.Provider value={scrollValue}>
-      <div className="w-full h-screen text-dark-shade relative">
+      <div id="landingPage" className="w-full h-screen text-dark-shade relative">
+
         <div className="w-full min-h-screen">
-          <div className="fixed top-0 w-full z-50 mb-10 md:mb-20">
+
+          <motion.div
+            className=" w-full z-50 mb-10 md:mb-20"
+            animate={controls}
+            variants={headerVariant}
+            initial="inSky"
+            
+            style={{
+              willChange: "transform",
+              position: "fixed",
+              top: 0,
+              transformOrigin: "top left",
+            }}
+          >
             <Header controls={controls} />
-          </div>
+          </motion.div>
           <div
             id="contentSection"
             className="absolute bottom-0 w-full h-18 md:h-32 z-50 flex justify-center items-center "
             ref={navBarRef}
           >
             <motion.div
-              className="max-w-[1000px] items-center justify-center flex  w-full"
+              className="max-w-[2000px] w-full "
               animate={controls}
               variants={navLinkVariant}
               initial="init"
+ 
             >
               <Suspense fallback={<LoaderOne />}>
                 <NavLinks />
@@ -140,6 +188,7 @@ const LandingPage: React.FC<LandingPageProps> = ({}) => {
               animate={controls}
               variants={navVariant}
               initial="init"
+     
             >
               <div className="w-full flex flex-col justify-end items-center">
                 <div className="flex flex-row w-full justify-between max-w-[1400px]">
@@ -147,7 +196,7 @@ const LandingPage: React.FC<LandingPageProps> = ({}) => {
 
                   <FgPersonSvgComponent controls={controls} />
                 </div>
-                <div className="w-full h-24 md:h-32 bg-light-shade" />
+                <div className="w-full h-24 md:h-32 bg-lightest-shade " />
               </div>
             </motion.div>
           </div>
@@ -180,6 +229,9 @@ const LandingPage: React.FC<LandingPageProps> = ({}) => {
               className=" absolute top-0 left-0 w-full h-full daytime"
             />
           </motion.div>
+          <div className="absolute top-0 right-0 m-10 z-50">
+          <ThemeToggle />
+        </div>
         </div>
       </div>
     </ScrollContext.Provider>

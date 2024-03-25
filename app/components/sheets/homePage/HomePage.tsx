@@ -2,7 +2,7 @@ import React from "react";
 import UnderConstruction from "../UnderConstruction";
 
 const HomePage = () => {
-  const publish = false
+  const publish = true
 
   if (!publish) {
     return (

@@ -20,10 +20,12 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
+        "lightest-shade": "var(--lightest-shade)",
         "light-shade": "var(--light-shade)",
         "dark-shade": "var(--dark-shade)",
         "light-accent": "var(--light-accent)",
         "dark-accent": "var(--dark-accent)",
+        "darkest-accent": "var(--darkest-accent)",
         "main-brand": "var(--main-brand)",
       },
     },

@@ -1,81 +1,96 @@
 export type PipelineStageType = {
-    id: number;
-    name: string;
-    description: string;
-    imageBg: string;
-    imageFg: string;
-    items: string[];
-  };
-  
-  export const pipelineStages: PipelineStageType[] = [
-    {
-        id: 0,
-        name: "The Frontend Pipeline",
-        description: "The frontend pipeline is a series of steps that are followed to develop a website or web application.",
-        imageBg: "frontendPipeline.webp",
-        imageFg: "tree1.svg",
-        items: ["Requirement Analysis", "Design", "Development", "Testing", "Review", "Deployment", "Post Launch"],
-    },
-    {
-      id: 1,
-      name: "Requirement Analysis",
-      description: "Gather and understand the requirements of the project",
-      imageBg: "requirementAnalysis.webp",
-      imageFg: "cityBuildings5.svg",
-      items: ["Objective", "Audience", "Function", "Timeline"],
-    },
-    {
-      id: 2,
-      name: "Design",
-      description: "Create wireframes and prototypes",
-      imageBg: "design.webp",
-      imageFg: "cityBuildings4.svg",
-      items: ["Wireframe", "Prototyping", "Review and Approval"],
-    },
-    {
-      id: 3,
-      name: "Development",
-      description: "Set up and version control",
-      imageBg: "development.webp",
-      imageFg: "cityBuildings3.svg",
-      items: ["Set up", "Version Control"],
-    },
-    {
-      id: 4,
-      name: "Testing",
-      description: "Unit, Integration, Cross Browser, Cross Device, Performance",
-      imageBg: "testing.webp",
-      imageFg: "cityBuildings2.svg",
-      items: [
-        "Unit",
-        "Integration",
-        "Cross Browser",
-        "Cross Device",
-        "Performance",
-      ],
-    },
-    {
-      id: 5,
-      name: "Review",
-      description: "Approval and Feedback",
-      imageBg: "review.webp",
-      imageFg: "cityBuildings1.svg",
-      items: ["Approval", "Feedback"],
-    },
-    {
-      id: 6,
-      name: "Deployment",
-      description: "Staging, Production, DNS, Web Hosting, Database Setup",
-      imageBg: "deployment.webp",
-      imageFg: "trees1.svg",
-      items: ["Staging", "Production", "DNS", "Web Hosting", "Database Setup"],
-    },
-    {
-      id: 7,
-      name: "Post Launch",
-      description: "Maintenance, Support, Analytics, SEO",
-      imageBg: "postLaunch.webp",
-      imageFg: "tree2.svg",
-      items: ["Maintenance", "Support", "Analytics", "SEO"],
-    },
-  ];
+  id: number;
+  name: string;
+  description: string;
+  imageBg: string;
+  imageFg: string;
+  items: string[];
+};
+
+export const pipelineStages: PipelineStageType[] = [
+  {
+    id: 0,
+    name: "The Frontend Development Lifecycle",
+    description:
+    "A structured approach to frontend development ensures projects are strategically planned, beautifully executed, and rigorously validated.",
+    imageBg: "frontendPipeline.webp",
+    imageFg: "tree1.svg",
+    items: [],
+  },
+  {
+    id: 1,
+    name: "Project Discovery",
+    description: "Collaborating to identify the project's vision, target users, key functionalities, and deadlines.",
+    imageBg: "requirementAnalysis.webp",
+    imageFg: "cityBuildings5.svg",
+    items: ["Client Consultations", "User Persona Development", "Competitive Analysis", "Detailed Scope Document"],
+  },
+  {
+    id: 2,
+    name: "UX-Focused Design",
+    description: "Crafting intuitive user experiences through visually appealing, user-centric interfaces.",
+    imageBg: "design.webp",
+    imageFg: "cityBuildings4.svg",
+    items: ["Low-Fidelity Wireframes",
+    "High-Fidelity Mockups",
+    "Interactive Prototypes",
+    "Accessibility Evaluation",],
+  },
+  {
+    id: 3,
+    name: "Foundation Setup & Coding",
+    description: "Establishing a robust project foundation and transforming designs into functional code",
+    imageBg: "development.webp",
+    imageFg: "cityBuildings3.svg",
+    items: ["Development Environment Setup",
+    "Git Version Control",
+    "Semantic HTML, CSS, JavaScript",
+    "Framework Implementation",],
+  },
+  {
+    id: 4,
+    name: "Comprehensive Testing",
+    description: "Ensuring optimal functionality, compatibility, and performance across platforms.",
+    imageBg: "testing.webp",
+    imageFg: "cityBuildings2.svg",
+    items: [
+      "Unit Testing",
+      "Integration Testing",
+      "Cross-Browser & Device Testing",
+      "Load and Stress Testing",
+    ],
+  },
+  {
+    id: 5,
+    name: "Stakeholder Review",
+    description: "Seeking feedback and securing approval for a successful launch.",
+    imageBg: "review.webp",
+    imageFg: "cityBuildings1.svg",
+    items: ["Design & Functionality Walkthroughs",
+    "Iterative Refinement",
+    "Formal Sign-Off",],
+  },
+  {
+    id: 6,
+    name: "Strategic Deployment",
+    description: "Seamlessly launching the web project into its live environment.",
+    imageBg: "deployment.webp",
+    imageFg: "trees1.svg",
+    items: ["Staging Environment Deployment",
+    "Production Release",
+    "DNS Configuration",
+    "Reliable Web Hosting",
+    "Database Integration",],
+  },
+  {
+    id: 7,
+    name: "Post-Launch Optimization",
+    description: "Providing ongoing support and maximizing the website's impact.",
+    imageBg: "postLaunch.webp",
+    imageFg: "tree2.svg",
+    items: ["Proactive Maintenance and Updates",
+    "Responsive User Support",
+    "Performance Monitoring & Analytics",
+    "Search Engine Optimization (SEO)",],
+  },
+];

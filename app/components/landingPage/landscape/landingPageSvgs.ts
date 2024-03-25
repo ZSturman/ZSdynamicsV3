@@ -109,80 +109,81 @@ interface Colors {
 
 const colors: Colors = {
   lushGreen: {
-    day: "#2b664f",
-    night: "#0f251f",
+    day: "#4a6978", // A softened green with a hint of blue to match --light-accent
+    night: "#2a394e", // Matched to --dark-shade for a deep, rich night color
   },
 
   springGreen: {
-    day: "#77DD77",
-    night: "#336633",
+    day: "#6a8da4", // A lighter, softer green-blue, akin to --light-shade but greener
+    night: "#405d71", // A darker accent, aligned with --dark-accent
   },
 
   yellowingGreen: {
-    day: "#C6CE4A",
-    night: "#4e5525",
+    day: "#7a928b", // A muted green with a yellow undertone, softer and fits the theme
+    night: "#2a394e", // Using --dark-shade for consistency in darker themes
   },
 
   driedGrass: {
-    day: "#999966",
-    night: "#525239",
+    day: "#8c9aa7", // A greyish tone that blends well with your light shades
+    night: "#405d71", // Keeping with the darker theme, matches --dark-accent
   },
 
   darkBrown: {
-    day: "#40291D",
-    night: "#25180f",
+    day: "#6a7885", // A dark, muted tone that fits with --main-brand, but warmer
+    night: "#2a394e", // Echoes --dark-shade for a cohesive night color
   },
 
   reddishBrown: {
-    day: "#774433",
-    night: "#3c2018",
+    day: "#748899", // A cooler tone that still has warmth, aligning with your scheme
+    night: "#405d71", // Matches --dark-accent for a harmonious dark theme
   },
 
   muddyBrown: {
-    day: "#674A38",
-    night: "#3b2a1d",
+    day: "#7c8999", // A muted, earthy color that complements your light and main brand colors
+    night: "#2a394e", // Reflects --dark-shade, ensuring depth in the color scheme
   },
 
   clay: {
-    day: "#B97A57",
-    night: "#734b33",
+    day: "#8499ae", // A light, warm gray that hints at your light shade
+    night: "#405d71", // Harmonizes with --dark-accent, offering depth
   },
 
   beachSand: {
-    day: "#F4E1C1",
-    night: "#aba08a",
+    day: "#c4ccd3", // A very light gray, almost white, to brighten and open spaces
+    night: "#a8b5cf", // A light shade that complements your --light-shade
   },
 
   desertSand: {
-    day: "#E2CA76",
-    night: "#9a8152",
+    day: "#c0c7d6", // A muted, light sandy color that complements --lightest-shade
+    night: "#828da2", // Aligns with --main-brand for consistency in darker settings
   },
 
   goldenSand: {
-    day: "#EDC9AF",
-    night: "#ada17a",
+    day: "#becde3",
+    night: "#a8b5cf",
   },
 
   tan: {
-    day: "#D2B48C",
-    night: "#8c7251",
+    day: "#ced5de", // A muted tan that blends seamlessly with your palette
+    night: "#587a8d", // Matching --light-accent for a consistent, thematic night mode
   },
 
   gravel: {
-    day: "#888888",
-    night: "#4d4d4d",
+    day: "#b1becd", // A neutral, mid-tone gray that supports the main color scheme
+    night: "#405d71", // Echoing --dark-accent for a solid, dark variant
   },
 
   gravel1: {
-    day: "#AFA59A",
-    night: "#63584c",
+    day: "#c0ccd8", // A lighter gravel, providing a soft, supportive backdrop
+    night: "#2a394e", // Using --dark-shade for a strong, cohesive night mode
   },
 
   rocks: {
-    day: "#708090",
-    night: "#3c4d59",
+    day: "#9aabb9", // A cooler, stony gray that fits well within the theme
+    night: "#405d71", // Matching --dark-accent for depth in the color palette
   },
 };
+
 
 const getColorVariant = (color: string) => {
   return {

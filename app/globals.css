@@ -12,11 +12,15 @@
 }
 
 :root {
-  --light-shade: #fbfafb;
-  --light-accent: #c7d5e1;
+  --lightest-shade: #fbfafb;
+  --light-shade: #a8b5cf;
+  --light-accent: #587a8d;
+  
   --main-brand: #828da2;
-  --dark-accent: #5c7a8d;
-  --dark-shade: #212e3f;
+
+  --dark-accent: #405d71;
+  --dark-shade: #2a394e;
+  --darkest-shade: #101721;
 }
 
 ::-webkit-scrollbar {
@@ -26,11 +30,14 @@
 }
 
 .dark {
-  --light-shade: #212e3f;
-  --light-accent: #5c7a8d;
+  --lightest-shade: #101721;
+  --light-shade: #2a394e;
+  --light-accent: #405d71;
 
-  --dark-accent: #5b6d7d;
-  --dark-shade: #fbfafb;
+  --dark-accent: #587a8d;
+  --dark-shade: #a8b5cf;
+  --darkest-shade: #fbfafb;
+
 }
 
 

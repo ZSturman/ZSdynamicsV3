@@ -29,7 +29,7 @@ const LandingPage: React.FC<LandingPageProps> = ({}) => {
 
   const { scrollYProgress } = useScroll({
     target: navBarRef,
-    offset: ["end end", "start start"],
+    offset: ["end end", "end start"],
   });
 
   const scrollValue = useMemo(() => ({ scrollYProgress }), [scrollYProgress]);
@@ -110,7 +110,7 @@ const LandingPage: React.FC<LandingPageProps> = ({}) => {
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.on('change',(latestValue) => {
-     (latestValue >.95 ? controls.start("inNav") : controls.start("inSky"));
+     (latestValue > .85 ? controls.start("inNav") : controls.start("inSky"));
     });
 
     return () => unsubscribe();
@@ -126,7 +126,7 @@ const LandingPage: React.FC<LandingPageProps> = ({}) => {
       },
     },
     inNav: {
-      scale: .25,
+      scale: .5,
       transition: {
         duration: .4,
         type: "tween",
@@ -143,17 +143,12 @@ const LandingPage: React.FC<LandingPageProps> = ({}) => {
         <div className="w-full min-h-screen">
 
           <motion.div
-            className=" w-full z-50 mb-10 md:mb-20"
-            animate={controls}
-            variants={headerVariant}
-            initial="inSky"
-            
-            style={{
-              willChange: "transform",
-              position: "fixed",
-              top: 0,
-              transformOrigin: "top left",
-            }}
+            className=" w-full z-50 mb-10 md:mb-20 "
+            //animate={controls}
+            //variants={headerVariant}
+            //initial="inSky"
+            //style={{ position: "fixed", top: 0 }}
+          
           >
             <Header controls={controls} />
           </motion.div>

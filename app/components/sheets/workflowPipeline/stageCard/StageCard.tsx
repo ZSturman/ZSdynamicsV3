@@ -76,7 +76,7 @@ const StageCard: FC<StageCardProps> = ({ stage }) => {
   };
 
   return (
-    <> 
+    <>
       <motion.div
         className="relative w-full h-full mt-48 group flex items-center justify-center cursor-pointer "
         onMouseEnter={onMouseEnter}
@@ -112,16 +112,15 @@ const StageCard: FC<StageCardProps> = ({ stage }) => {
                   </div>
 
                   <div className="w-full h-1/2 flex flex-col justify-evenly text-lightest-shade p-5">
-                    <div className="flex flex-row justify-center ">
-                    <h3 className=" text-2xl opacity-50">{stage.id !== 0 && `${stage.id}. `} </h3>
-                    <h3 className=" text-3xl tracking-tight text-nowrap">{stage.name}</h3>
+                    <div className="flex flex-row justify-center items-center text-center ">
+                      <h3 className=" text-3xl tracking-tight ">
+                        {stage.name}
+                      </h3>
                     </div>
 
                     <div className="  text-center">
-                    <p className="text">{stage.description}</p>
-                  
-                  </div>
-
+                      <p className="tracking-tight">{stage.description}</p>
+                    </div>
                   </div>
                 </div>
                 <div className="absolute bottom-0 w-full h-80 bg-dark-accent rounded-md shadow-lg transition-shadow duration-300 ease-in-out group-hover:shadow-[0_20px_16px_rgb(0_0_0/0.4)]" />
@@ -152,7 +151,6 @@ const StageCard: FC<StageCardProps> = ({ stage }) => {
           </div>
         </motion.div>
       </motion.div>
-
     </>
   );
 };

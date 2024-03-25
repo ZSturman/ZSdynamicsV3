@@ -4,12 +4,15 @@ import {
 } from "framer-motion";
 import socialMediaLinks from "./socialLinks";
 import { useScrollContext } from "@/app/context/scrollContext";
+import { useRouter } from "next/navigation";
 
 interface HeaderProps {
   controls: any;
 }
 
 const Header: FC<HeaderProps> = ({ controls }) => {
+  const router = useRouter();
+
 
   useEffect(() => {
     controls.start("headerEnter");
@@ -85,7 +88,16 @@ const Header: FC<HeaderProps> = ({ controls }) => {
     }),
   };
 
-
+/*   const removeContent = () => {
+    router.push(`?${new URLSearchParams({}).toString()}`, {
+      scroll: false,
+    });
+    const section = document.querySelector("#landingPage");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+ */
 
   return (
     <div className="flex flex-col relative h-full">
@@ -108,6 +120,7 @@ const Header: FC<HeaderProps> = ({ controls }) => {
           variants={nameVariant}
           initial="init"
           exit="headerExit"
+          //onClick={removeContent}
         >
           Zachary Sturman
         </motion.div>

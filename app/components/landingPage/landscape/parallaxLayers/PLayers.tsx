@@ -103,9 +103,12 @@ const SkySvgComponent = ({ theme }: { theme: string }) => {
   );
 };
 
-const SkySvgComponentMemo = React.memo(SkySvgComponent, (prevProps, nextProps) => {
-  return prevProps.theme === nextProps.theme;
-});
+const SkySvgComponentMemo = React.memo(
+  SkySvgComponent,
+  (prevProps, nextProps) => {
+    return prevProps.theme === nextProps.theme;
+  }
+);
 
 const PLayers: FC<PLayersProps> = ({ controls }) => {
   const { theme } = useTheme();
@@ -132,76 +135,35 @@ const PLayers: FC<PLayersProps> = ({ controls }) => {
       <ParallaxLayer offset={0} speed={0}>
         {/* Sky  */}
 
-<SkySvgComponentMemo theme={theme} />
-        {/* <SkySvgComponent theme={theme} /> */}
+        <SkySvgComponentMemo theme={theme} />
 
         {/* Horizon */}
 
         {landscapeBgArray.map(
           (landscapeBg, index) =>
             landscapeBg.beyondHorizon && (
-              <ParallaxLayer key={index} offset={0} speed={landscapeBg.speed} className={`-z[${landscapeBg.zIndex}]`}>
+              <ParallaxLayer
+                key={index}
+                offset={0}
+                speed={landscapeBg.speed}
+                className={`-z[${landscapeBg.zIndex}]`}
+              >
                 {/* zIndex Layer */}
 
                 <motion.div
                   className="w-full h-full absolute top-0"
-                  //variants={landscapeBg.variants}
-                  //animate={controls}
                 >
-                  <Image src={`/landingPage/z${landscapeBg.zIndex}.png`} alt="landscape" fill objectFit="cover"/> 
+                  <Image
+                    src={`/landingPage/z${landscapeBg.zIndex}.webp`}
+                    alt="landscape"
+                    fill
+                    objectFit="cover"
+                  />
 
-                  {/* left */}
-{/*     <motion.div
-                    className="w-full h-full absolute left-0"
-                    variants={landscapeBg.leftGroup.variants}
-                    animate={controls}
-                  >
-                    <motion.svg
-                      width="100%"
-                      height="100%"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      {landscapeBg.leftGroup.paths.map((path, index) => (
-                        <motion.path
-                          key={index}
-                          d={path.d}
-                          fill="green"
-                          animate={theme === "dark" ? "night" : "day"}
-                          variants={path.variants}
-                        />
-                      ))}
-                    </motion.svg>
-                  </motion.div>  */}
-
-                  {/* right */}
-{/*                   <motion.div
-                    className="w-full h-full absolute left-0"
-                    variants={landscapeBg.rightGroup.variants}
-                    animate={controls}
-                  >
-                    <motion.svg
-                      width="100%"
-                      height="100%"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      {landscapeBg.rightGroup.paths.map((path, index) => (
-                        <motion.path
-                          key={index}
-                          d={path.d}
-                          fill={path.fill}
-                          animate={theme === "dark" ? "night" : "day"}
-                          variants={path.variants}
-                        />
-                      ))}
-                    </motion.svg>
-                  </motion.div> */}
-
-                </motion.div> 
+                </motion.div>
 
                 <motion.div
                   className="w-full h-full"
-                  //variants={landscapeBg.blurVariant}
-                  //animate={controls}
                 />
               </ParallaxLayer>
             )
@@ -212,72 +174,27 @@ const PLayers: FC<PLayersProps> = ({ controls }) => {
         {landscapeBgArray.map(
           (landscapeBg, index) =>
             !landscapeBg.beyondHorizon && (
-              <ParallaxLayer key={index} offset={0} speed={landscapeBg.speed} className={`-z[${landscapeBg.zIndex}]`}>
-
-<Image src={`/landingPage/z${landscapeBg.zIndex}.png`} alt="landscape" fill objectFit="cover"/>
-                {/* zIndex Layer */}
-{/*                 <motion.div
-                  className="w-full h-full absolute top-0"
-                  variants={landscapeBg.variants}
-                  animate={controls}
-                > */}
-                
-
-
-                  {/* left */}
-{/*  <motion.div
-                    className="w-full h-full absolute left-0"
-                    variants={landscapeBg.leftGroup.variants}
-                    animate={controls}
-                  >
-                    <motion.svg
-                      width="100%"
-                      height="100%"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      {landscapeBg.leftGroup.paths.map((path, index) => (
-                        <motion.path
-                          key={index}
-                          d={path.d}
-                          fill={path.fill}
-                          animate={theme === "dark" ? "night" : "day"}
-                          variants={path.variants}
-                        />
-                      ))}
-                    </motion.svg>
-                  </motion.div>  */}
-
-                  {/* right */}
-{/*   <motion.div
-                    className="w-full h-full absolute left-0"
-                    variants={landscapeBg.rightGroup.variants}
-                    animate={controls}
-                  >
-                    <motion.svg
-                      width="100%"
-                      height="100%"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      {landscapeBg.rightGroup.paths.map((path, index) => (
-                        <motion.path
-                          key={index}
-                          d={path.d}
-                          fill={path.fill}
-                          animate={theme === "dark" ? "night" : "day"}
-                          variants={path.variants}
-                        />
-                      ))}
-                    </motion.svg>
-                  </motion.div>  */}
-            {/*     </motion.div> */}
-                <motion.div
-                  className="w-full h-full backdrop-blur-[.5px]"
-                  //initial={{ opacity: 0 }}
-                  //animate={{ opacity: 1 }}
-                  //transition={{ delay: index * 0.1 }}
+              <ParallaxLayer
+                key={index}
+                offset={0}
+                speed={landscapeBg.speed}
+                className={`-z[${landscapeBg.zIndex}]`}
+              >
+                <Image
+                  src={`/landingPage/z${landscapeBg.zIndex}.webp`}
+                  alt="landscape"
+                  fill
+                  objectFit="cover"
                 />
 
 
+
+                <motion.div
+                  className="w-full h-full backdrop-blur-[.5px]"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: index * 0.1 }}
+                />
               </ParallaxLayer>
             )
         )}

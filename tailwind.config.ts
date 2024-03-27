@@ -21,11 +21,11 @@ const config: Config = {
       },
       colors: {
         "lightest-shade": "var(--lightest-shade)",
+        "darkest-shade": "var(--darkest-shade)",
         "light-shade": "var(--light-shade)",
         "dark-shade": "var(--dark-shade)",
         "light-accent": "var(--light-accent)",
         "dark-accent": "var(--dark-accent)",
-        "darkest-accent": "var(--darkest-accent)",
         "main-brand": "var(--main-brand)",
       },
     },

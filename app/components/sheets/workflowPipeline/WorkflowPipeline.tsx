@@ -71,7 +71,7 @@ const WorkflowPipeline = () => {
     },
   };
 
-  const publish = true;
+  const publish = false;
 
   if (!publish) {
     return <UnderConstruction />;

@@ -1,24 +1,18 @@
 import { FC, useEffect } from "react";
-import {
-  motion,
-} from "framer-motion";
+import { motion } from "framer-motion";
 import socialMediaLinks from "./socialLinks";
-import { useScrollContext } from "@/app/context/scrollContext";
-import { useRouter } from "next/navigation";
 
 interface HeaderProps {
   controls: any;
 }
 
 const Header: FC<HeaderProps> = ({ controls }) => {
-  const router = useRouter();
-
 
   useEffect(() => {
     controls.start("headerEnter");
 
     return () => {
-      controls.stop()
+      controls.stop();
     };
   }, [controls]);
 
@@ -88,22 +82,9 @@ const Header: FC<HeaderProps> = ({ controls }) => {
     }),
   };
 
-/*   const removeContent = () => {
-    router.push(`?${new URLSearchParams({}).toString()}`, {
-      scroll: false,
-    });
-    const section = document.querySelector("#landingPage");
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  };
- */
-
   return (
-    <div className="flex flex-col relative h-full">
-      <motion.div
-        className="p-5 md:p-20"
-      >
+    <div className="flex flex-col relative text-darkest-shade">
+      <motion.div className="p-5 md:p-20">
         <motion.div
           className="w-full flex items-center text-lg md:text-xl lg:text-3xl xl:text-4xl justify-center font-urbanist-light"
           variants={jobTitleVariant}
@@ -115,7 +96,7 @@ const Header: FC<HeaderProps> = ({ controls }) => {
         </motion.div>
 
         <motion.div
-          className="w-full flex items-center justify-center text-4xl md:text-6xl lg:text-7xl xl:text-9xl mb-5 md:mb-10 font-urbanist-light"
+          className="w-full flex items-center justify-center text-4xl md:text-6xl lg:text-7xl xl:text-7xl mb-5 md:mb-10 font-urbanist-light"
           animate={controls}
           variants={nameVariant}
           initial="init"
@@ -148,8 +129,6 @@ const Header: FC<HeaderProps> = ({ controls }) => {
             );
           })}
         </motion.div>
-
-
       </motion.div>
     </div>
   );

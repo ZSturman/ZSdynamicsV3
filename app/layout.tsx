@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
 import { ThemeProvider } from "./context/themeContext";
+
+//import { GoogleTagManager } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   title: "Zachary Sturman - Full Stack Front End Developer",
@@ -16,13 +17,14 @@ export default function RootLayout({
 }>) {
   return (
     <ThemeProvider>
+      
       <html lang="en">
-        <body
-          className={`min-w-screen min-h-screen overflow-x-hidden`}
-        >
-          <div className="flex flex-col justify-center items-center">
+        {/* <GoogleTagManager gtmId="G-Z3ZJYGM3EM" /> */}
+
+        <body className={`min-w-screen min-h-screen`}>
+          <main className="">
             {children}
-          </div>
+          </main>
         </body>
       </html>
     </ThemeProvider>

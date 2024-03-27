@@ -116,7 +116,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ setFlashMessage }) => {
           <div className="input-container mb-4">
             <label
               htmlFor="name"
-              className="block text-light-shade font-medium mb-2"
+              className="block text-slate-900 font-medium mb-2"
             >
               Name:
             </label>
@@ -134,7 +134,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ setFlashMessage }) => {
           <div className="input-container">
             <label
               htmlFor="name"
-              className="block text-light-shade font-medium mb-2"
+              className="block text-slate-900 font-medium mb-2"
             >
               Email:
             </label>
@@ -151,7 +151,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ setFlashMessage }) => {
           <div className="input-container">
             <label
               htmlFor="name"
-              className="block text-light-shade font-medium mb-2"
+              className="block text-slate-900 font-medium mb-2"
             >
               Message:{" "}
             </label>

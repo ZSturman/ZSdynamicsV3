@@ -1,47 +1,15 @@
-import { easeIn, motion, useSpring, useTransform } from "framer-motion";
+/* import { motion, useTransform } from "framer-motion";
 import landscapeBG from "./landingPageSvgs";
 import { useScrollContext } from "@/app/context/scrollContext";
 import { useTheme } from "@/app/context/themeContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Landscape = ({ controls }: { controls: any }) => {
   const { scrollYProgress } = useScrollContext();
   const { theme } = useTheme();
-
-  const z45 = useTransform(scrollYProgress, [0, 1], [0, 1300]);
-  const z40 = useTransform(scrollYProgress, [0, 1], [0, 1250]);
-  const z35 = useTransform(scrollYProgress, [0, 1], [0, 1170]);
-  const z30 = useTransform(scrollYProgress, [0, 1], [0, 1130]);
-  const z25 = useTransform(scrollYProgress, [0, 1], [0, 1050]);
-  const z20 = useTransform(scrollYProgress, [0, 1], [0, 1010]);
-  const z15 = useTransform(scrollYProgress, [0, 1], [0, 970]);
-  const z10 = useTransform(scrollYProgress, [0, 1], [0, 900]);
-  const z5 = useTransform(scrollYProgress, [0, 1], [0, 750]);
-
-  const getParallaxEffect = (zIndex: number) => {
-    switch (zIndex) {
-      case -45:
-        return z45;
-      case -40:
-        return z40;
-      case -35:
-        return z35;
-      case -30:
-        return z30;
-      case -25:
-        return z25;
-      case -20:
-        return z20;
-      case -15:
-        return z15;
-      case -10:
-        return z10;
-      case -5:
-        return z5;
-      default:
-        return z5;
-    }
-  };
+  const [parallaxOffsets, setParallaxOffsets] = useState<
+    Record<number, number>
+  >({});
 
   useEffect(() => {
     if (theme === "dark") {
@@ -50,6 +18,23 @@ const Landscape = ({ controls }: { controls: any }) => {
       controls.start("day");
     }
   }, [theme, controls]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const newOffsets = landscapeBG.reduce((acc, layer, index) => {
+        // Use the layer's depth value directly to calculate the offset
+        acc[index] = -scrollY * (layer.depth * .5); // Adjust the 0.05 multiplier if needed
+        return acc;
+      }, {} as Record<number, number>);
+      setParallaxOffsets(newOffsets);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const groundParallaxScale = useTransform(
     scrollYProgress,
@@ -78,7 +63,7 @@ const Landscape = ({ controls }: { controls: any }) => {
       variants={svgContainerVariant}
       initial="init"
       animate={controls}
-      style={{ willChange: "transform" }}
+      //style={{ perspective }}
     >
       <motion.rect
         style={{ y: groundParallaxScale }}
@@ -92,22 +77,6 @@ const Landscape = ({ controls }: { controls: any }) => {
           <stop offset="40%" stopColor="#b1ecf9" />
           <stop offset="40.5%" stopColor="#4A90E2" />
         </linearGradient>
-        <linearGradient id="dayGradient" x1="0" x2="0" y1="0" y2="1">
-          {/* Define your day gradient stops here */}
-        </linearGradient>
-        <linearGradient id="nightGradient" x1="0" x2="0" y1="0" y2="1">
-          {/* Define your night gradient stops here */}
-        </linearGradient>
-
-        {/* 
-              <linearGradient id="waterGradient" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="38%" stopColor="transparent" stop-opacity="0.2" />
-          <stop offset="40%" stopColor="#90d4f1" />
-          <stop offset="45%" stopColor="#4A90E2" />
-          <stop offset="50%" stopColor="#3e7bc9" />
-          <stop offset="55%" stopColor="#4A90E2" />
-          <stop offset="65%" stopColor="#b1ecf9" stop-opacity="0.4" />
-        </linearGradient> */}
       </defs>
 
       {landscapeBG.map((layer, index) => {
@@ -117,7 +86,7 @@ const Landscape = ({ controls }: { controls: any }) => {
             variants={layer.variants}
             initial="init"
             animate={controls}
-            style={{ y: getParallaxEffect(layer.zIndex) }}
+            style={{ translateY: parallaxOffsets[index] || 0 }}
             className={`-z[${layer.zIndex}]`}
           >
             {layer.leftGroup.g && (
@@ -162,3 +131,22 @@ const Landscape = ({ controls }: { controls: any }) => {
 };
 
 export default Landscape;
+ */
+
+
+
+
+
+/*   const z45 = useTransform(scrollYProgress, [0, 1], [0, 650]);
+  
+  const z40 = useTransform(scrollYProgress, [0, 1], [0, 625]);
+  const z35 = useTransform(scrollYProgress, [0, 1], [0, 585]);
+  const z30 = useTransform(scrollYProgress, [0, 1], [0, 565]);
+  const z25 = useTransform(scrollYProgress, [0, 1], [0, 550]);
+  const z20 = useTransform(scrollYProgress, [0, 1], [0, 510]);
+  const z15 = useTransform(scrollYProgress, [0, 1], [0, 470]);
+
+  const z10 = useTransform(scrollYProgress, [0, 1], [0, 50]); 
+  const z5 = useTransform(scrollYProgress, [0, 1], [0, -100]);  */
+//  const z10 = useTransform(scrollYProgress, [0, 1], [0, 400]);
+//const z5 = useTransform(scrollYProgress, [0, 1], [0, 250]);

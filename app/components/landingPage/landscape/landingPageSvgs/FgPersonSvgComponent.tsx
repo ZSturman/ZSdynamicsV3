@@ -281,11 +281,11 @@ const FgPersonSvgComponent = ({
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="265"
-        fill="none"
+        height="386"
         viewBox="0 0 265 386"
-        className={`max-w-[40vw] max-h-[40vh]  ${
+        className={`max-w-[40vw] max-h-[40vh] md:max-w-[20vw] md:max-h-[20vh] lg:max-w-[20vw] lg:max-h-[20vh]${
           className || ""
-        } translate-y-3 `}
+        } translate-y-2 `}
         style={{ overflow: "visible" }}
       >
         <g id="person">
@@ -366,7 +366,7 @@ const FgPersonSvgComponent = ({
           style={{ filter: "drop-shadow(0px 8px 4px rgba(0, 0, 0, 0.4))" }}
         >
           <motion.path
-            variants={backpackMainVariants}
+            variants={backpackStrapsVariants}
             animate={controls}
             initial="day"
             id="backpackStraps"
@@ -419,7 +419,7 @@ const FgPersonSvgComponent = ({
           />
           <motion.path
             id="backpackPocketFlapLeftStrap"
-            variants={backpackPocketFlapsVariants}
+            variants={backpackPocketStrapsVariants}
             animate={controls}
             initial="day"
             d="M206 309v-3l-1-2v-8l1-3 1-2 3-2c1 0 2 1 2 3l1 3v1l-1 11v9l1 6-1 3-1 3c0 2-1 3-2 3l-3-2-1-3v-11l1-4v-2Z"
@@ -433,7 +433,7 @@ const FgPersonSvgComponent = ({
           />
           <motion.path
             id="backpackPocketFlapRightStrap"
-            variants={backpackPocketFlapsVariants}
+            variants={backpackPocketStrapsVariants}
             animate={controls}
             initial="day"
             d="m244 305-1-3v-13l2-2 2-2c2 0 3 1 3 3v33l-1 3c0 2-1 3-3 3l-2-2-1-3-1-3v-2l1-4v-2l1-4v-2Z"

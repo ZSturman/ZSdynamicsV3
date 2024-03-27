@@ -16,13 +16,13 @@ const ContactSheet = () => {
       {flashMessage.active && (
         <div
           className={`${
-            flashMessage.type === "success" ? "bg-green-400" : "bg-red-400"
-          } text-white p-5 text-center`}
+            flashMessage.type === "success" ? "bg-green-400/50" : "bg-red-400/50"
+          } text-white p-5 text-center backdrop-blur-sm`}
         >
           {flashMessage.message}
         </div>
       )}
-      <div className="shadow-lg rounded-lg bg-slate-100/20 m-2 sm:m-5 sm:px-5 py-10 sm:w-[500px] md:w-[650px] lg:w-[900px]">
+      <div className="shadow-lg rounded-lg bg-slate-50/60 text-slate-900 backdrop-blur-sm m-2 sm:m-5 sm:px-5 py-10 sm:w-[500px] md:w-[650px] lg:w-[900px]">
         <ContactForm setFlashMessage={setFlashMessage} />
         <motion.div className="w-full flex flex-row flex-wrap gap-10 items-center justify-center px-10">
           {socialMediaLinks.map((link, index) => {

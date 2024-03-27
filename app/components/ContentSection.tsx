@@ -7,15 +7,20 @@ import { useSearchParams } from "next/navigation";
 import WorkflowPipeline from "./sheets/workflowPipeline/WorkflowPipeline";
 import HomePage from "./sheets/homePage/HomePage";
 import WrongLocation from "./sheets/wrongLocation/WrongLocation";
+import Header from "./landingPage/header/Header";
+import { useEffect, useRef } from "react";
 
-interface ContentSectionProps {}
+interface ContentSectionProps {
+  controls: any;
+}
 
-const ContentSection: React.FC<ContentSectionProps> = ({}) => {
+const ContentSection: React.FC<ContentSectionProps> = ({ controls }) => {
   const searchParams = useSearchParams();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const hasContent = searchParams.has("content");
   const selectedContent = searchParams.get("content");
-  const pages = ["bio", "studio", "workflow", "contact"];
+  const pages = ["bio", "studio", "contact", "home"];
 
   const pageRevealVariants = {
     hidden: { x: "100vw" },
@@ -29,100 +34,107 @@ const ContentSection: React.FC<ContentSectionProps> = ({}) => {
     },
   };
 
+  const contentSheets = [
+    Header, SkillsAndBio, Studio, Contact
+  ]
 
   return (
     <>
-      {/* Content */}
-      <div className="min-h-screen bg-light-accent overflow-x-hidden">
-        <AnimatePresence mode="wait">
-          {selectedContent === "bio" && (
-            /* Bio Page */
-            <motion.div
-              variants={pageRevealVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              className="text-dark-shade w-full flex flex-col justify-start items-center"
-              key={"bio"}
-            >
-              <SkillsAndBio />
-            </motion.div>
-          )}
-
-          {selectedContent === "studio" && (
-            /* Studio Page */
-            <motion.div
-              variants={pageRevealVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              className="text-dark-shade w-full flex flex-col justify-start items-center"
-              key={"studio"}
-            >
-              <Studio />
-            </motion.div>
-          )}
-
-          {selectedContent === "workflow" && (
-            /* workflow Page */
-            <motion.div
-              variants={pageRevealVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              className="text-dark-shade w-full flex flex-col justify-start items-center"
-              key={"workflow"}
-            >
-              <WorkflowPipeline />
-            </motion.div>
-          )}
-
-          {selectedContent === "contact" && (
-            /* Contact Page */
-            <motion.div
-              variants={pageRevealVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              className="text-dark-shade w-full flex flex-col justify-start items-center"
-              key={"contact"}
-            >
-              <Contact />
-            </motion.div>
-          )}
-
-          {!hasContent ||
-            (!pages.includes(selectedContent ?? "") && (
-              /* Wrong Location */
-              <motion.div
-                variants={pageRevealVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                className="h-full w-full flex flex-col justify-start items-center"
-                key={"default"}
-              >
-                <WrongLocation />
-              </motion.div>
-            ))}
-
-          {!hasContent && (
-              /* Home Page */
-              <motion.div
-                variants={pageRevealVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                className=" w-full flex flex-col justify-start items-center"
-                key={"default"}
-              >
-                <HomePage />
-              </motion.div>
-            )}
-        </AnimatePresence>
+      <div className="flex flex-row h-full overflow-x-scroll snap-x snap-mandatory items-center justify-start" style={{ width: `calc(100vw * ${contentSheets.length})`, overflowX: "scroll" }}>
+        {contentSheets.map((Sheet, index) => (
+          <div key={index} className="w-screen flex-shrink-0 snap-center" style={{ width: '100vw' }}>
+            <Sheet controls={controls} />
+          </div>
+        ))}
       </div>
     </>
   );
 };
 
 export default ContentSection;
+
+
+
+/*   return (
+    <>
+{/* 
+      <AnimatePresence mode="wait">
+        {selectedContent === "bio" && (
+          <motion.div
+            variants={pageRevealVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            key={"bio"}
+          >
+            <SkillsAndBio />
+          </motion.div>
+        )}
+
+        {selectedContent === "studio" && (
+       
+          <motion.div
+            variants={pageRevealVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            key={"studio"}
+          >
+            <Studio />
+          </motion.div>
+        )}
+
+        {selectedContent === "workflow" && (
+          
+          <motion.div
+            variants={pageRevealVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            key={"workflow"}
+          >
+            <WorkflowPipeline />
+          </motion.div>
+        )}
+
+        {selectedContent === "contact" && (
+          
+          <motion.div
+            variants={pageRevealVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            key={"contact"}
+          >
+            <Contact />
+          </motion.div>
+        )}
+
+        {!hasContent ||
+          (!pages.includes(selectedContent ?? "") && (
+            
+            <motion.div
+              variants={pageRevealVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              key={"default"}
+            >
+              <WrongLocation />
+            </motion.div>
+          ))}
+
+        {!hasContent ||
+          (selectedContent === "home" && (
+            
+            <motion.div
+              variants={pageRevealVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              key={"home"}
+            >
+              <Header controls={controls} />
+            </motion.div>
+          ))}
+      </AnimatePresence> */

@@ -1,56 +1,25 @@
 "use client";
-import {
-  motion,
-  useAnimationControls,
-  useInView,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "framer-motion";
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { motion, useAnimationControls, useScroll } from "framer-motion";
+import { Suspense, useEffect, useMemo } from "react";
 
-import Header from "./landingPage/header/Header";
 import NavLinks from "./navLinks/NavLinks";
 import { useTheme } from "../context/themeContext";
 import LoaderOne from "../loaders/svgs";
 import FgPersonSvgComponent from "./landingPage/landscape/landingPageSvgs/FgPersonSvgComponent";
 import ScrollContext from "../context/scrollContext";
-import Landscape from "./landingPage/landscape/Landscape";
-import ThemeToggle from "./ToggleTheme";
+import ThemeToggle from "./toggles/ToggleTheme";
+import { Parallax, ParallaxLayer } from "@react-spring/parallax";
+import ContentSection from "./ContentSection";
+import PLayers from "./landingPage/landscape/parallaxLayers/PLayers";
+import HomePage from "./sheets/homePage/HomePage";
 
-interface LandingPageProps {}
-
-const LandingPage: React.FC<LandingPageProps> = ({}) => {
+const LandingPage: React.FC<{}> = () => {
   const { theme } = useTheme();
-  const navBarRef = useRef(null);
-
-
   const controls = useAnimationControls();
-
-  const { scrollYProgress } = useScroll({
-    target: navBarRef,
-    offset: ["end end", "end start"],
-  });
+  const { scrollYProgress } = useScroll();
 
   const scrollValue = useMemo(() => ({ scrollYProgress }), [scrollYProgress]);
 
-  const daytimeVariant = {
-    init: {
-      opacity: 0,
-    },
-    enter: {
-      opacity: 1,
-      transition: {
-        duration: 2,
-      },
-    },
-    exit: {
-      opacity: 0,
-      transition: {
-        duration: 2,
-      },
-    },
-  };
   const navVariant = {
     init: { scale: 1.9, filter: "blur(20px)", y: 100, x: 100 },
     final: {
@@ -73,160 +42,52 @@ const LandingPage: React.FC<LandingPageProps> = ({}) => {
   };
 
   useEffect(() => {
-    controls.set("init");
-    controls.start("final");
-  }, [controls]);
-
-  useEffect(() => {
-    if (theme === "dark") {
-      controls.start("exit");
-    } else {
-      controls.start("enter");
-    }
+    const animationVariant = theme === "dark" ? "exit" : "enter";
+    controls.start(animationVariant);
   }, [theme, controls]);
 
-  const skyContainerVariant = {
-    final: {
-      transition: {
-        staggerChildren: 1,
-      },
-    },
-  };
-
-  const skyOverlayVariant = {
-    init: {
-      opacity: 0,
-    },
-    final: {
-      opacity: 0.3,
-      transition: {
-        duration: 1,
-      },
-    },
-  };
-
-
-
-
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.on('change',(latestValue) => {
-     (latestValue > .85 ? controls.start("inNav") : controls.start("inSky"));
-    });
-
-    return () => unsubscribe();
-  }, [scrollYProgress, controls]);
-
-  const headerVariant = {
-    inSky: {
-      scale: 1,
-      transition: {
-        duration: .4,
-        type: "tween",
-        ease: "easeInOut",
-      },
-    },
-    inNav: {
-      scale: .5,
-      transition: {
-        duration: .4,
-        type: "tween",
-        ease: "easeInOut",
-      },
-    },
-  }
-
+  const navH = "96px";
 
   return (
     <ScrollContext.Provider value={scrollValue}>
-      <div id="landingPage" className="w-full h-screen text-dark-shade relative">
+      <div
+        className="relative w-screen min-h-screen text-dark-shade"
+        id="landingPage"
+      >
+        {/* Parallax Background */}
+        <Parallax pages={2} style={{ top: 0, left: 0, position: "absolute" }}>
+          <ParallaxLayer offset={0} speed={0} >
+            <PLayers controls={controls} />
+          </ParallaxLayer>
 
-        <div className="w-full min-h-screen">
+          <ParallaxLayer offset={1} speed={0}>
+            <HomePage />
+          </ParallaxLayer>
+        </Parallax>
 
-          <motion.div
-            className=" w-full z-50 mb-10 md:mb-20 "
-            //animate={controls}
-            //variants={headerVariant}
-            //initial="inSky"
-            //style={{ position: "fixed", top: 0 }}
-          
-          >
-            <Header controls={controls} />
-          </motion.div>
-          <div
-            id="contentSection"
-            className="absolute bottom-0 w-full h-18 md:h-32 z-50 flex justify-center items-center "
-            ref={navBarRef}
-          >
-            <motion.div
-              className="max-w-[2000px] w-full "
-              animate={controls}
-              variants={navLinkVariant}
-              initial="init"
- 
-            >
-              <Suspense fallback={<LoaderOne />}>
-                <NavLinks />
-              </Suspense>
-            </motion.div>
-          </div>
-          <div
-            className="absolute bottom-0 w-full -z-10"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-end",
-              height: "100%",
-            }}
-          >
-            <motion.div
-              className="flex flex-col justify-end items-end"
-              animate={controls}
-              variants={navVariant}
-              initial="init"
-     
-            >
-              <div className="w-full flex flex-col justify-end items-center">
-                <div className="flex flex-row w-full justify-between max-w-[1400px]">
-                  <div className="" />
 
-                  <FgPersonSvgComponent controls={controls} />
-                </div>
-                <div className="w-full h-24 md:h-32 bg-lightest-shade " />
-              </div>
-            </motion.div>
-          </div>
-
-          <div className="absolute bottom-0 w-full h-screen items-center -z-20 overflow-hidden">
-            <Landscape controls={controls} />
-          </div>
-
-          <motion.div
-            variants={skyContainerVariant}
-            animate={controls}
-            className="absolute top-0 left-0 w-full h-screen -z-50 bg-black"
-          >
-            <motion.div
-              variants={skyOverlayVariant}
-              className=" absolute top-0 left-0 w-full h-full nightsky-base nightsky-overlay-3"
-            />
-            <motion.div
-              variants={skyOverlayVariant}
-              className=" absolute top-0 left-0 w-full h-full nightsky-base nightsky-overlay-2"
-            />
-            <motion.div
-              variants={skyOverlayVariant}
-              className=" absolute top-0 l≈eft-0 w-full h-full nightsky-base nightsky-overlay-1"
-            />
-
-            <motion.div
-              variants={daytimeVariant}
-              animate={controls}
-              className=" absolute top-0 left-0 w-full h-full daytime"
-            />
-          </motion.div>
-          <div className="absolute top-0 right-0 m-10 z-50">
-          <ThemeToggle />
+    {/* Content and Navigation */}
+    <div className="sticky top-0 w-full">
+          <Suspense fallback={<LoaderOne />}>
+            <ContentSection controls={controls} />
+          </Suspense>
         </div>
+
+        {/* FgPersonSvgComponent and NavLinks */}
+        <div className="fixed bottom-0 w-full overflow-hidden">
+          <div className="flex justify-end">
+            <FgPersonSvgComponent controls={controls} />
+          </div>
+          <div className="w-full bg-lightest-shade shadow-2xl" style={{ height: navH }}>
+            <Suspense fallback={<LoaderOne />}>
+              <NavLinks />
+            </Suspense>
+          </div>
+        </div>
+
+        {/* Theme Toggle */}
+        <div className="absolute" style={{ top: "30px", left: "30px" }}>
+          <ThemeToggle />
         </div>
       </div>
     </ScrollContext.Provider>

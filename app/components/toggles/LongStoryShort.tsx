@@ -1,5 +1,5 @@
 import { motion, useAnimationControls } from "framer-motion";
-import { useTheme } from "../context/themeContext";
+import { useTheme } from "../../context/themeContext";
 
 interface LongStoryShortProps {
   context: boolean;

@@ -1,5 +1,6 @@
-import React from "react";
+import {motion} from "framer-motion";
 import UnderConstruction from "../UnderConstruction";
+import Image from "next/image";
 
 const HomePage = () => {
   const publish = true
@@ -11,12 +12,15 @@ const HomePage = () => {
   }
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center bg-light-accent">
-      <div className="text-dark-shade text-center text-2xl hover:text-3xl cursor-pointer">
+      <motion.div className="text-dark-shade text-center text-2xl hover:text-3xl cursor-pointer" initial={{ y: 10, opacity: 0 }} animate={{ y:0, opacity: 1 }} whileInView={{ y:-20, opacity: 1 }} transition={{ duration: .75, delay: 1 }}>
         Hello.
-      </div>
-      <div className="text-dark-shade text-center  cursor-pointer">
-        More is coming here later. Come back later to see it in action
-      </div>
+      </motion.div>
+      <Image
+        src="/animals/quokka.jpeg"
+        alt="Quokka"
+        width={300}
+        height={300} 
+        className="rounded-md shadow-lg"/>
     </div>
   );
 };

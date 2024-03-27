@@ -145,8 +145,8 @@ const PLayers: FC<PLayersProps> = ({ controls }) => {
 
                 <motion.div
                   className="w-full h-full absolute top-0"
-                  variants={landscapeBg.variants}
-                  animate={controls}
+                  //variants={landscapeBg.variants}
+                  //animate={controls}
                 >
                   <Image src={`/landingPage/z${landscapeBg.zIndex}.png`} alt="landscape" fill objectFit="cover"/> 
 
@@ -200,8 +200,8 @@ const PLayers: FC<PLayersProps> = ({ controls }) => {
 
                 <motion.div
                   className="w-full h-full"
-                  variants={landscapeBg.blurVariant}
-                  animate={controls}
+                  //variants={landscapeBg.blurVariant}
+                  //animate={controls}
                 />
               </ParallaxLayer>
             )
@@ -272,9 +272,9 @@ const PLayers: FC<PLayersProps> = ({ controls }) => {
             {/*     </motion.div> */}
                 <motion.div
                   className="w-full h-full backdrop-blur-[.5px]"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: index * 0.1 }}
+                  //initial={{ opacity: 0 }}
+                  //animate={{ opacity: 1 }}
+                  //transition={{ delay: index * 0.1 }}
                 />
 
 
